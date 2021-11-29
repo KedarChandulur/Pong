@@ -19,7 +19,7 @@ void MainRenderWindow::QuitGame()
 	this->mainRenderWindow->close();
 }
 
-const bool MainRenderWindow::IsGameRunning() const
+const bool MainRenderWindow::IsGameWindowOpen() const
 {
 	return this->mainRenderWindow->isOpen();
 }

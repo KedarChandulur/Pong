@@ -12,7 +12,7 @@ public:
 	MainRenderWindow();
 	~MainRenderWindow();
 	//Checks if Game is running(Returns true if window is open and false if closed)
-	const bool IsGameRunning() const;
+	const bool IsGameWindowOpen() const;
 	//Main Game Loop
 	void UpdateGame();
 private:
