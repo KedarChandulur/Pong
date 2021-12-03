@@ -2,7 +2,7 @@
 
 int main()
 {
-	MainRenderWindow mainWindow;
+	Pong::MainRenderWindow mainWindow;
 
 	while (mainWindow.IsGameWindowOpen())
 	{

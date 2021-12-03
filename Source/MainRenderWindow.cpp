@@ -1,31 +1,31 @@
 #include <iostream>
 #include "MainRenderWindow.h"
 
-//void MainRenderWindow::CreateWindowOnLoad()
-MainRenderWindow::MainRenderWindow()
+Pong::MainRenderWindow::MainRenderWindow()
 {
 	this->videoMode.width = this->videoMode.height = 800;
 	this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close);
 	//this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
 }
 
-MainRenderWindow::~MainRenderWindow()
+Pong::MainRenderWindow::~MainRenderWindow()
 {
 	delete this->mainRenderWindow;
 }
 
-void MainRenderWindow::QuitGame()
+void Pong::MainRenderWindow::QuitGame()
 {
 	this->mainRenderWindow->close();
 }
 
-const bool MainRenderWindow::IsGameWindowOpen() const
+const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 {
 	return this->mainRenderWindow->isOpen();
 }
 
-void MainRenderWindow::UpdateGame()
+void Pong::MainRenderWindow::UpdateGame()
 {
+	//Not using poll event, using only wait event and waiting for some event to be triggered.
 	while (this->mainRenderWindow->waitEvent(this->eventRef))
 	{
 		switch (this->eventRef.type)
@@ -45,13 +45,24 @@ void MainRenderWindow::UpdateGame()
 				break;
 			}
 		case sf::Event::EventType::MouseButtonPressed:
-			//this->mainRenderWindow-
-			std::cout << "Pressed\n";
+
+			std::cout << "Mouse Pressed\n";
 			break;
 		case sf::Event::EventType::MouseButtonReleased:
-			//this->mainRenderWindow-
-			std::cout << "Released\n";
+			
+			std::cout << "Mouse Released\n";
 			break;
 		}
+
+		RenderUpdate();
 	}
+}
+
+void Pong::MainRenderWindow::RenderUpdate()
+{
+	//Clearing everything with a solid color.(Clearing previous frame)
+	this->mainRenderWindow->clear(sf::Color(255, 255, 0, 255));
+
+	//Rendering the window(Rendering new/current frame)
+	this->mainRenderWindow->display();
 }
