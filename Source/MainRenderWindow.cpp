@@ -5,8 +5,8 @@ Pong::MainRenderWindow::MainRenderWindow()
 {
 	this->videoMode.width = 960;
 	this->videoMode.height = 720;
+	//this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Default);
 	this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close);
-	//this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
 	this->mainRenderWindow->setVerticalSyncEnabled(true);
 	LoadBackground();
 }
