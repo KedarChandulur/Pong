@@ -7,6 +7,8 @@ Pong::MainRenderWindow::MainRenderWindow()
 	this->videoMode.height = 720;
 	this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close);
 	//this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
+	this->mainRenderWindow->setVerticalSyncEnabled(true);
+	LoadBackground();
 }
 
 Pong::MainRenderWindow::~MainRenderWindow()
@@ -19,6 +21,20 @@ void Pong::MainRenderWindow::QuitGame()
 	this->mainRenderWindow->close();
 }
 
+void Pong::MainRenderWindow::LoadBackground()
+{
+	bgTexture.create(videoMode.width, videoMode.height);
+	if (bgTexture.loadFromFile("Resources/Pong_BG.png"))
+	{
+		std::cout << "Background texture loaded successfully.\n";
+		this->bgSprite.setTexture(bgTexture);
+	}
+	else
+	{
+		std::cout << "Error loading the background texture.\n";
+	}
+}
+
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 {
 	return this->mainRenderWindow->isOpen();
@@ -26,7 +42,7 @@ const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 
 void Pong::MainRenderWindow::UpdateGame()
 {
-	//Not using poll event, using only wait event and waiting for some event to be triggered.
+	//Not using "pollEvent()" - instead using "waitEvent()" and waiting for some event to be triggered.
 	while (this->mainRenderWindow->waitEvent(this->eventRef))
 	{
 		switch (this->eventRef.type)
@@ -42,16 +58,13 @@ void Pong::MainRenderWindow::UpdateGame()
 			}
 			else if (this->eventRef.key.code == sf::Keyboard::Space)
 			{
-				std::cout << "Space Pressed\n";
 				break;
 			}
 		case sf::Event::EventType::MouseButtonPressed:
 
-			std::cout << "Mouse Pressed\n";
 			break;
 		case sf::Event::EventType::MouseButtonReleased:
-			
-			std::cout << "Mouse Released\n";
+
 			break;
 		}
 
@@ -62,7 +75,10 @@ void Pong::MainRenderWindow::UpdateGame()
 void Pong::MainRenderWindow::RenderUpdate()
 {
 	//Clearing everything with a solid color.(Clearing previous frame)
-	this->mainRenderWindow->clear(sf::Color(255, 255, 0, 255));
+	this->mainRenderWindow->clear();
+
+	//Drawing background sprite.
+	this->mainRenderWindow->draw(bgSprite);
 
 	//Rendering the window(Rendering new/current frame)
 	this->mainRenderWindow->display();

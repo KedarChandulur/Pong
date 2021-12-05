@@ -23,15 +23,21 @@ namespace Pong
 	private:
 		//Main Renderer Loop
 		void RenderUpdate();
-
 		//Closes the Main Game Window
 		void QuitGame();
+		//Initializes required resources
+		void LoadBackground();
 		//Render Window Variable Reference
 		sf::RenderWindow* mainRenderWindow = nullptr;
 		//Video Mode Varaible Reference
 		sf::VideoMode videoMode;
 		//Event Getter Variable
 		sf::Event eventRef;
+		//Background Sprite
+		sf::Sprite bgSprite;
+		//Background Texture
+		sf::Texture bgTexture;
+		/*sf::RectangleShape bgSprite;*/
 	};
 }
 #endif
