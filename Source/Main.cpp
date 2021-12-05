@@ -2,9 +2,9 @@
 
 int main()
 {
-	MainRenderWindow mainWindow;
+	Pong::MainRenderWindow mainWindow;
 
-	while (mainWindow.IsGameRunning())
+	while (mainWindow.IsGameWindowOpen())
 	{
 		mainWindow.UpdateGame();
 	}
