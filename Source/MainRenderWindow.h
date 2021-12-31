@@ -1,7 +1,8 @@
 #ifndef MAINRENDERWINDOW_H
 #define MAINRENDERWINDOW_H
 
-#include <SFML/Graphics.hpp>
+#include "Paddle.h"
+#include "Ball.h"
 
 namespace Pong
 {
@@ -27,6 +28,9 @@ namespace Pong
 		void QuitGame();
 		//Initializes required resources
 		void LoadBackground();
+		//Initializes in game elements - Paddles and ball.
+		void LoadInGameElements();
+
 		//Render Window Variable Reference
 		sf::RenderWindow* mainRenderWindow = nullptr;
 		//Video Mode Varaible Reference
@@ -38,6 +42,21 @@ namespace Pong
 		//Background Texture
 		sf::Texture bgTexture;
 		/*sf::RectangleShape bgSprite;*/
+
+		//InGameContraints Struct Holder
+		//InGameContraints inGameContraints;
+
+		//Clock Reference
+		sf::Clock clock;
+
+		//In Game Elements
+		Paddle leftPaddle_Ref;
+		Paddle rightPaddle_Ref;
+		Ball ball_Ref;
+
+		//sf::RectangleShape leftPaddle;
+		//sf::RectangleShape rightPaddle;
+		//sf::CircleShape ball;
 	};
 }
 #endif
