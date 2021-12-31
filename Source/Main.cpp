@@ -8,4 +8,6 @@ int main()
 	{
 		mainWindow.UpdateGame();
 	}
+
+	return 0;
 }

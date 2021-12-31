@@ -1,17 +1,15 @@
 #include <iostream>
-//#include <ctime>
 #include "MainRenderWindow.h"
 
 Pong::MainRenderWindow::MainRenderWindow()
 {
-	this->videoMode.width = inGameContraints.defaultWindowWidth;
-	this->videoMode.height = inGameContraints.defaultWindowHeight;
+	this->videoMode.width = 960.0f;
+	this->videoMode.height = 720.0f;
 	this->videoMode.bitsPerPixel = 32U;
-	//this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Default);
 	this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close);	
 	this->mainRenderWindow->setVerticalSyncEnabled(true);
 	LoadBackground();
-	LoadInGameElements();	
+	LoadInGameElements();
 }
 
 Pong::MainRenderWindow::~MainRenderWindow()
@@ -50,52 +48,9 @@ void Pong::MainRenderWindow::LoadBackground()
 
 void Pong::MainRenderWindow::LoadInGameElements()
 {
-	sf::Vector2f paddleSize{ 25.0f, 100.0f };
-	//std::cout << this->videoMode.width / this->videoMode.height;	
-	const float outLineThickness = 2.5f;
-
-	this->leftPaddle_Ref.Init(inGameContraints.defaultSpeed, sf::Color::Green,videoMode, 0.05f);
-	this->rightPaddle_Ref.Init(inGameContraints.defaultSpeed, sf::Color::Red, videoMode, 0.925f);
-	this->ball_Ref.Init(videoMode.width, videoMode.height, inGameContraints.pi);
-	//this->leftPaddle.setSize(paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
-	//this->rightPaddle.setSize(paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
-
-	//this->leftPaddle.setOutlineThickness(outLineThickness);
-	//this->rightPaddle.setOutlineThickness(outLineThickness);
-
-	//this->leftPaddle.setOutlineColor(sf::Color::Green);
-	//this->rightPaddle.setOutlineColor(sf::Color::Red);
-
-	////this->leftPaddle.setPosition(videoMode.width * 0.05f, videoMode.height / 2.f);
-	////this->rightPaddle.setPosition(videoMode.width * 0.95f, videoMode.height / 2.f);
-
-	//this->leftPaddle.setPosition(videoMode.width * 0.05f, videoMode.height / 2.f - (paddleSize.x * 2));
-	//this->rightPaddle.setPosition(videoMode.width * 0.925f, videoMode.height / 2.f - (paddleSize.x * 2));
-
-	//this->ball.setRadius(ballRadius);
-	//this->ball.setPosition(videoMode.width / 2, videoMode.height / 2);
-
-	////We are using "std::srand()" for creating randomness in initial ball angle/direction.
-	////Initialise srand() using the current time for preventing srand to return same random value in different application instance(s).
-	//std::srand(time(NULL));
-
-	//float cosAngleValue = 0.0f;
-	//float absValue = 0.0f;
-
-	//// Keeping the ball angle/direction as horizontal as possible.
-	//do
-	//{
-	//	auto rand = std::rand() % 360;
-	//	std::cout << "rand: " << rand << std::endl;
-	//	std::cout << "rand * 2: " << rand * 2 << std::endl;
-	//	std::cout << "rand * 2 * pi: " << rand * 2 * inGameContraints.pi << std::endl;
-
-	//	ballAngle = (rand) * 2 * inGameContraints.pi / 360;
-	//	std::cout << "ballAngle: " << ballAngle << std::endl;
-
-	//	cosAngleValue = std::cos(ballAngle);
-	//	std::cout << "cosAngleValue: " << cosAngleValue << std::endl;
-	//} while (std::abs(cosAngleValue) < 0.7f);
+	this->leftPaddle_Ref.Init(sf::Color::Green,videoMode, 0.05f);
+	this->rightPaddle_Ref.Init(sf::Color::Red, videoMode, 0.925f);
+	this->ball_Ref.Init(videoMode.width, videoMode.height);
 }
 
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
@@ -105,6 +60,8 @@ const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 
 void Pong::MainRenderWindow::UpdateGame()
 {
+	float deltaTime = clock.restart().asSeconds();
+
 	while (this->mainRenderWindow->pollEvent(this->eventRef))
 	{
 		switch (this->eventRef.type)
@@ -118,105 +75,59 @@ void Pong::MainRenderWindow::UpdateGame()
 				QuitGame();
 				break;
 			}
-			else if (this->eventRef.key.code == sf::Keyboard::Space)
+			else if (this->eventRef.key.code == sf::Keyboard::W)
 			{
-				//float cosAngleValue = 0.0f;
-				//float absValue = 0.0f;
-
-				//// Keeping the ball angle/direction as horizontal as possible.
-				//do
-				//{
-				//	auto rand = std::rand() % 360;
-				//	std::cout << "rand: " << rand << std::endl;
-				//	std::cout << "rand * 2: " << rand * 2 << std::endl;
-				//	std::cout << "rand * 2 * pi: " << rand * 2 * inGameContraints.pi << std::endl;
-
-				//	ballAngle = (rand) * 2 * inGameContraints.pi / 360;
-				//	std::cout << "ballAngle: " << ballAngle << std::endl;
-
-				//	cosAngleValue = std::cos(ballAngle);
-				//	std::cout << "cosAngleValue: " << cosAngleValue << std::endl;
-				//} while (std::abs(cosAngleValue) < 0.7f);
-
-				break;
+				leftPaddle_Ref.MoveUp(deltaTime);
+				//break;
 			}
-		/*case sf::Event::EventType::Resized:
-			
-			break;*/
-		/*case sf::Event::EventType::MouseButtonPressed:
-
-			break;
-		case sf::Event::EventType::MouseButtonReleased:
-
-			break;*/		
+			else if (this->eventRef.key.code == sf::Keyboard::S)
+			{
+				leftPaddle_Ref.MoveDown(videoMode, deltaTime);				
+				//break;
+			}
+			else if (this->eventRef.key.code == sf::Keyboard::Up)
+			{				
+				rightPaddle_Ref.MoveUp(deltaTime);
+				//break;
+			}
+			else if (this->eventRef.key.code == sf::Keyboard::Down)
+			{
+				rightPaddle_Ref.MoveDown(videoMode, deltaTime);
+				//break;
+			}		
 		}
 	}
 
-	//float deltaTime = clock.restart().asSeconds();
-
-	//UpdateInGameElements(inGameContraints.defaultSpeed * clock.restart().asSeconds());
-	float deltaTime = inGameContraints.defaultSpeed * clock.restart().asSeconds();
+	if (ball_Ref.CheckForRight_BoundryCollision(videoMode.width))
+	{
+		QuitGame();
+		//isPlaying = false;
+		//pauseMessage.setString("You won!\nPress space to restart or\nescape to exit");
+	}
+	else if (ball_Ref.CheckForLeft_BoundryCollision())
+	{
+		QuitGame();
+		//isPlaying = false;
+		//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
+	}
 	ball_Ref.Update(videoMode, deltaTime);
-	//UpdateInGameElements();
+	ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref);
+	ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref);
 	RenderUpdate();
 }
 
-//void Pong::MainRenderWindow::UpdateInGameElements()
-//{
-//	//Checking Right Border collision with ball
-//	//Player-2/Right Paddle Wins
-//	if (ball.getPosition().x - ballRadius < 0.0f)
-//	{
-//		//isPlaying = false;
-//		//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
-//	}
-//	//Checking Left Border collision with ball
-//	//Player-1/Left Paddle Wins
-//	if (ball.getPosition().x + ballRadius > this->videoMode.width)
-//	{
-//		//isPlaying = false;
-//		//pauseMessage.setString("You won!\nPress space to restart or\nescape to exit");
-//	}
-//	//Checking Top Border collision with ball
-//	if (ball.getPosition().y - ballRadius < 0.0f)
-//	{
-//		//ballSound.play();
-//		ballAngle = -ballAngle;
-//		//Offset for position.
-//		ball.setPosition(ball.getPosition().x, ballRadius + 0.1f);
-//	}
-//	//Checking Button Border collision with ball
-//	//if (ball.getPosition().y + ballRadius > gameHeight)
-//	if (ball.getPosition().y + ballRadius > this->videoMode.height)
-//	{
-//		//ballSound.play();
-//		ballAngle = -ballAngle;
-//		//Offset for position.
-//		ball.setPosition(ball.getPosition().x, this->videoMode.height - ballRadius - 0.1f);
-//	}
-//
-//	//Using cos for determining x - move direction
-//	//Using sin for determining y - move direction	
-//	float deltaTime = inGameContraints.defaultSpeed * clock.restart().asSeconds();
-//	ball.move(std::cos(ballAngle) * deltaTime, std::sin(ballAngle) * deltaTime);
-//}
-
 void Pong::MainRenderWindow::RenderUpdate()
 {
-	//Clearing everything with a solid color.(Clearing previous frame)
+	//Clearing previous frame/window
 	this->mainRenderWindow->clear();
 
 	//Drawing background sprite.
 	this->mainRenderWindow->draw(bgSprite);
 
-	//Rendering paddles and balls
+	//Rendering paddles and ball
 	this->mainRenderWindow->draw(leftPaddle_Ref.mainPaddleShape);
 	this->mainRenderWindow->draw(rightPaddle_Ref.mainPaddleShape);
 	this->mainRenderWindow->draw(ball_Ref.mainCircleShape);
-
-	//this->mainRenderWindow->draw(leftPaddle);
-	//this->mainRenderWindow->draw(rightPaddle);
-	//this->mainRenderWindow->draw(ball);
 
 	//Rendering the window(Rendering new/current frame)
 	this->mainRenderWindow->display();
