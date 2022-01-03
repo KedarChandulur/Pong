@@ -9,5 +9,5 @@ int main()
 		mainWindow.UpdateGame();
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
