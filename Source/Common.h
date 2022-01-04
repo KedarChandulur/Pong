@@ -7,6 +7,11 @@ namespace Pong
 	{
 	protected:
 		float speed = 150.0f;
+
+		const unsigned char outLineThickness = 3;
 	};
+	
+	static const unsigned int SCREEN_WIDTH = 800;
+	static const unsigned int SCREEN_HEIGHT = 600;
 }
 #endif

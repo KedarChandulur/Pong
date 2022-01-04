@@ -9,13 +9,15 @@ namespace Pong
 	class Paddle : Pong::Common
 	{
 	public:
-		void Init(const sf::Color& paddleColor, const sf::VideoMode& videoMode, const float& paddleoffset);
+		void Init(const sf::Color& paddleColor, const float& paddleoffset);
 		void MoveUp(const float& deltaTime);
-		void MoveDown(const sf::VideoMode& videoMode, const float& deltaTime);
-		sf::RectangleShape mainPaddleShape;
+		void MoveDown(const float& deltaTime);
+
+		const sf::RectangleShape& GetMainPaddleRef() const;
+
 		const sf::Vector2f paddleSize{ 25.0f, 100.0f };
 	private:
-		const float outLineThickness = 2.5f;
+		sf::RectangleShape mainPaddle;
 	};
 }
 #endif
