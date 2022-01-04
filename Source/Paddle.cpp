@@ -1,29 +1,35 @@
 #include "Paddle.h"
 
-void Pong::Paddle::Init(const sf::Color& paddleColor, const sf::VideoMode& videoMode, const float& paddleoffset)
+void Pong::Paddle::Init(const sf::Color& paddleColor, const float& paddleoffset)
 {
-	//this->mainPaddleShape.setSize(this->paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
-	this->mainPaddleShape.setSize(this->paddleSize);
+	//this->mainPaddle.setSize(this->paddleSize);
+	this->mainPaddle.setSize(this->paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
 
-	this->mainPaddleShape.setOutlineThickness(this->outLineThickness);
-	this->mainPaddleShape.setOutlineColor(paddleColor);
-	this->mainPaddleShape.setPosition(videoMode.width * paddleoffset, videoMode.height / 2.f - (paddleSize.x * 2));
+	this->mainPaddle.setOutlineThickness(this->outLineThickness);
+	this->mainPaddle.setOutlineColor(paddleColor);
+	this->mainPaddle.setOrigin(paddleSize/2.0f);
+	this->mainPaddle.setPosition(Pong::SCREEN_WIDTH * paddleoffset, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
 
 	this->speed = 1000.0f;
 }
 
 void Pong::Paddle::MoveUp(const float& deltaTime)
 {
-	if (this->mainPaddleShape.getPosition().y > 6.50f)
+	if (this->mainPaddle.getPosition().y - paddleSize.y / 2 > 5.0f)
 	{
-		this->mainPaddleShape.move(0.f, -speed * deltaTime);
+		this->mainPaddle.move(0.f, -this->speed * deltaTime);
 	}
 }
 
-void Pong::Paddle::MoveDown(const sf::VideoMode& videoMode, const float& deltaTime)
+void Pong::Paddle::MoveDown(const float& deltaTime)
 {
-	if (this->mainPaddleShape.getPosition().y + paddleSize.y / 2 < videoMode.height - (paddleSize.x * 2))
+	if (this->mainPaddle.getPosition().y + paddleSize.y / 2 < Pong::SCREEN_HEIGHT - 5.0f)
 	{
-		this->mainPaddleShape.move(0.f, speed * deltaTime);
+		this->mainPaddle.move(0.f, this->speed * deltaTime);
 	}
+}
+
+const sf::RectangleShape& Pong::Paddle::GetMainPaddleRef() const
+{
+	return mainPaddle;
 }

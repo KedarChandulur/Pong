@@ -3,10 +3,8 @@
 
 Pong::MainRenderWindow::MainRenderWindow()
 {
-	this->videoMode.width = 960.0f;
-	this->videoMode.height = 720.0f;
-	this->videoMode.bitsPerPixel = 32U;
-	this->mainRenderWindow = new sf::RenderWindow(this->videoMode, "Pong Game", sf::Style::Titlebar | sf::Style::Close);	
+	//this->mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
+	this->mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Default);
 	this->mainRenderWindow->setVerticalSyncEnabled(true);
 	LoadBackground();
 	LoadInGameElements();
@@ -31,7 +29,7 @@ void Pong::MainRenderWindow::LoadBackground()
 		std::cout << "Image loaded.\n";
 	}*/
 
-	this->bgTexture.create(this->videoMode.width, this->videoMode.height);
+	this->bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
 	//this->bgTexture.create(bgImage.getSize().x, bgImage.getSize().y);
 
 	//if (this->bgTexture.loadFromImage(bgImage))
@@ -39,6 +37,10 @@ void Pong::MainRenderWindow::LoadBackground()
 	{		
 		std::cout << "Background texture loaded successfully.\n";
 		this->bgSprite.setTexture(bgTexture);
+
+		bgSprite.setScale(
+			Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+			Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
 	}
 	else
 	{
@@ -48,9 +50,9 @@ void Pong::MainRenderWindow::LoadBackground()
 
 void Pong::MainRenderWindow::LoadInGameElements()
 {
-	this->leftPaddle_Ref.Init(sf::Color::Green,videoMode, 0.05f);
-	this->rightPaddle_Ref.Init(sf::Color::Red, videoMode, 0.925f);
-	this->ball_Ref.Init(videoMode.width, videoMode.height);
+	this->leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
+	this->rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+	this->ball_Ref.Init();
 }
 
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
@@ -62,43 +64,41 @@ void Pong::MainRenderWindow::UpdateGame()
 {
 	float deltaTime = clock.restart().asSeconds();
 
-	while (this->mainRenderWindow->pollEvent(this->eventRef))
+	//sf::Event eventRef;
+
+	while (this->mainRenderWindow->pollEvent(eventRef))
 	{
-		switch (this->eventRef.type)
+		switch (eventRef.type)
 		{
 		case sf::Event::EventType::Closed:
 			QuitGame();
 			break;
 		case sf::Event::EventType::KeyPressed:
-			if (this->eventRef.key.code == sf::Keyboard::Escape)
+			if (eventRef.key.code == sf::Keyboard::Escape)
 			{
 				QuitGame();
 				break;
 			}
-			else if (this->eventRef.key.code == sf::Keyboard::W)
+			else if (eventRef.key.code == sf::Keyboard::W)
 			{
 				leftPaddle_Ref.MoveUp(deltaTime);
-				//break;
 			}
-			else if (this->eventRef.key.code == sf::Keyboard::S)
+			else if (eventRef.key.code == sf::Keyboard::S)
 			{
-				leftPaddle_Ref.MoveDown(videoMode, deltaTime);				
-				//break;
+				leftPaddle_Ref.MoveDown(deltaTime);
 			}
-			else if (this->eventRef.key.code == sf::Keyboard::Up)
+			else if (eventRef.key.code == sf::Keyboard::Up)
 			{				
 				rightPaddle_Ref.MoveUp(deltaTime);
-				//break;
 			}
-			else if (this->eventRef.key.code == sf::Keyboard::Down)
+			else if (eventRef.key.code == sf::Keyboard::Down)
 			{
-				rightPaddle_Ref.MoveDown(videoMode, deltaTime);
-				//break;
+				rightPaddle_Ref.MoveDown(deltaTime);
 			}		
 		}
 	}
 
-	if (ball_Ref.CheckForRight_BoundryCollision(videoMode.width))
+	if (ball_Ref.CheckForRight_BoundryCollision())
 	{
 		QuitGame();
 		//isPlaying = false;
@@ -110,13 +110,14 @@ void Pong::MainRenderWindow::UpdateGame()
 		//isPlaying = false;
 		//pauseMessage.setString("You lost!\nPress space to restart or\nescape to exit");
 	}
-	ball_Ref.Update(videoMode, deltaTime);
+
+	ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
 	ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref);
 	ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref);
-	RenderUpdate();
+	Render();
 }
 
-void Pong::MainRenderWindow::RenderUpdate()
+void Pong::MainRenderWindow::Render()
 {
 	//Clearing previous frame/window
 	this->mainRenderWindow->clear();
@@ -125,9 +126,9 @@ void Pong::MainRenderWindow::RenderUpdate()
 	this->mainRenderWindow->draw(bgSprite);
 
 	//Rendering paddles and ball
-	this->mainRenderWindow->draw(leftPaddle_Ref.mainPaddleShape);
-	this->mainRenderWindow->draw(rightPaddle_Ref.mainPaddleShape);
-	this->mainRenderWindow->draw(ball_Ref.mainCircleShape);
+	this->mainRenderWindow->draw(leftPaddle_Ref.GetMainPaddleRef());
+	this->mainRenderWindow->draw(rightPaddle_Ref.GetMainPaddleRef());
+	this->mainRenderWindow->draw(ball_Ref.GetMainBallRef());
 
 	//Rendering the window(Rendering new/current frame)
 	this->mainRenderWindow->display();
