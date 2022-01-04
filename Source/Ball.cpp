@@ -88,7 +88,7 @@ void Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle)
 {
 	// Check the collisions between the ball and the paddles
 	// Left Paddle
-	if (mainBall.getPosition().x - ballRadius < leftPaddle.GetMainPaddleRef().getPosition().x + leftPaddle.paddleSize.x / 2 &&
+	if (mainBall.getPosition().x < leftPaddle.GetMainPaddleRef().getPosition().x + leftPaddle.paddleSize.x / 2 &&
 		mainBall.getPosition().x - ballRadius > leftPaddle.GetMainPaddleRef().getPosition().x &&
 		mainBall.getPosition().y + ballRadius >= leftPaddle.GetMainPaddleRef().getPosition().y - leftPaddle.paddleSize.y / 2 &&
 		mainBall.getPosition().y - ballRadius <= leftPaddle.GetMainPaddleRef().getPosition().y + leftPaddle.paddleSize.y / 2)
