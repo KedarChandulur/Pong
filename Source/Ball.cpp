@@ -16,7 +16,9 @@ void Pong::Ball::Init()
 
 	//We are using "std::srand()" for creating randomness in initial ball angle/direction.
 	//Initialise srand() using the current time for preventing srand to return same random value in different application instance(s).
-	std::srand(time(NULL));
+	//Using static cast to cast from 'time_t' to 'unsigned int', preventing loss of data.
+	std::srand(static_cast<unsigned int>(std::time(NULL)));
+	//std::srand(time(NULL));
 
 	float cosAngleValue = 0.0f;
 
@@ -57,7 +59,7 @@ void Pong::Ball::CheckForTopAndBottom_BoundryCollision(const float& deltaTime)
 
 const bool Pong::Ball::CheckForLeft_BoundryCollision() const
 {
-	if (this->mainBall.getPosition().x - ballRadius < 0.0f)
+	if (this->mainBall.getPosition().x - ballRadius < 20.0f)
 	{
 		//Player-1/Left Paddle Wins
 		return true;
@@ -86,7 +88,7 @@ void Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle)
 {
 	// Check the collisions between the ball and the paddles
 	// Left Paddle
-	if (mainBall.getPosition().x - ballRadius < leftPaddle.GetMainPaddleRef().getPosition().x + leftPaddle.paddleSize.x / 2 &&
+	if (mainBall.getPosition().x < leftPaddle.GetMainPaddleRef().getPosition().x + leftPaddle.paddleSize.x / 2 &&
 		mainBall.getPosition().x - ballRadius > leftPaddle.GetMainPaddleRef().getPosition().x &&
 		mainBall.getPosition().y + ballRadius >= leftPaddle.GetMainPaddleRef().getPosition().y - leftPaddle.paddleSize.y / 2 &&
 		mainBall.getPosition().y - ballRadius <= leftPaddle.GetMainPaddleRef().getPosition().y + leftPaddle.paddleSize.y / 2)
