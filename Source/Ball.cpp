@@ -16,7 +16,7 @@ void Pong::Ball::Init()
 
 	//We are using "std::srand()" for creating randomness in initial ball angle/direction.
 	//Initialise srand() using the current time for preventing srand to return same random value in different application instance(s).
-	//Using static cast to cast from 'time_t' to 'unsigned int' preventing loss of data.
+	//Using static cast to cast from 'time_t' to 'unsigned int', preventing loss of data.
 	std::srand(static_cast<unsigned int>(std::time(NULL)));
 	//std::srand(time(NULL));
 
@@ -59,7 +59,7 @@ void Pong::Ball::CheckForTopAndBottom_BoundryCollision(const float& deltaTime)
 
 const bool Pong::Ball::CheckForLeft_BoundryCollision() const
 {
-	if (this->mainBall.getPosition().x - ballRadius < 0.0f)
+	if (this->mainBall.getPosition().x - ballRadius < 20.0f)
 	{
 		//Player-1/Left Paddle Wins
 		return true;
