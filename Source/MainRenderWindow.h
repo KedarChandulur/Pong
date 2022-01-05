@@ -13,6 +13,11 @@ namespace Pong
 	public:
 		MainRenderWindow();
 		~MainRenderWindow();
+
+		//Initializes required resources
+		//Returns true if Initialization was successfull.
+		bool Initialize();
+
 		//Main Game Loop
 		void UpdateGame();
 
@@ -23,10 +28,6 @@ namespace Pong
 		void Render();
 		//Closes the Main Game Window
 		void QuitGame();
-		//Initializes required resources
-		void LoadBackground();
-		//Initializes in game elements - Paddles and ball.
-		void LoadInGameElements();
 
 		//Render Window Variable Reference
 		sf::RenderWindow* mainRenderWindow = nullptr;
