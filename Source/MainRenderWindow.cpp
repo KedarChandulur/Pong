@@ -1,26 +1,24 @@
-#include <iostream>
 #include "MainRenderWindow.h"
 
 Pong::MainRenderWindow::MainRenderWindow()
 {
-	//this->mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
-	this->mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Default);
-	this->mainRenderWindow->setVerticalSyncEnabled(true);
-	LoadBackground();
-	LoadInGameElements();
+	//mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
+	//mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Default);
+	mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,48U), "Pong Game", sf::Style::Default);
+	mainRenderWindow->setVerticalSyncEnabled(true);
 }
 
 Pong::MainRenderWindow::~MainRenderWindow()
 {
-	delete this->mainRenderWindow;
+	delete mainRenderWindow;
 }
 
 void Pong::MainRenderWindow::QuitGame()
 {
-	this->mainRenderWindow->close();
+	mainRenderWindow->close();
 }
 
-void Pong::MainRenderWindow::LoadBackground()
+bool Pong::MainRenderWindow::Initialize()
 {
 	//sf::Image bgImage;
 
@@ -29,35 +27,40 @@ void Pong::MainRenderWindow::LoadBackground()
 		std::cout << "Image loaded.\n";
 	}*/
 
-	this->bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
-	//this->bgTexture.create(bgImage.getSize().x, bgImage.getSize().y);
+	bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
+	//bgTexture.create(bgImage.getSize().x, bgImage.getSize().y);
 
-	//if (this->bgTexture.loadFromImage(bgImage))
-	if (this->bgTexture.loadFromFile("Resources/Pong_BG.png"))
+	//if (bgTexture.loadFromImage(bgImage))
+	if (bgTexture.loadFromFile("Resources/Pong_BG.png"))
 	{		
-		std::cout << "Background texture loaded successfully.\n";
-		this->bgSprite.setTexture(bgTexture);
+		//std::cout << "Background texture loaded successfully.\n";
+		printf("Background texture loaded successfully.\n");
+		bgSprite.setTexture(bgTexture);
 
 		bgSprite.setScale(
 			Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
 			Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
+
+		//Paddle Initialization
+		leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
+		rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+
+		//Ball Initialization
+		ball_Ref.Init();
+
+		return true;
 	}
 	else
 	{
-		std::cout << "Error loading the background texture.\n";
+		//std::cout << "Error loading the background texture.\n";
+		printf("Error loading the background texture.\n");
+		return false;
 	}
-}
-
-void Pong::MainRenderWindow::LoadInGameElements()
-{
-	this->leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-	this->rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
-	this->ball_Ref.Init();
 }
 
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 {
-	return this->mainRenderWindow->isOpen();
+	return mainRenderWindow->isOpen();
 }
 
 void Pong::MainRenderWindow::UpdateGame()
@@ -66,7 +69,7 @@ void Pong::MainRenderWindow::UpdateGame()
 
 	//sf::Event eventRef;
 
-	while (this->mainRenderWindow->pollEvent(eventRef))
+	while (mainRenderWindow->pollEvent(eventRef))
 	{
 		switch (eventRef.type)
 		{
@@ -120,16 +123,16 @@ void Pong::MainRenderWindow::UpdateGame()
 void Pong::MainRenderWindow::Render()
 {
 	//Clearing previous frame/window
-	this->mainRenderWindow->clear();
+	mainRenderWindow->clear();
 
 	//Drawing background sprite.
-	this->mainRenderWindow->draw(bgSprite);
+	mainRenderWindow->draw(bgSprite);
 
 	//Rendering paddles and ball
-	this->mainRenderWindow->draw(leftPaddle_Ref.GetMainPaddleRef());
-	this->mainRenderWindow->draw(rightPaddle_Ref.GetMainPaddleRef());
-	this->mainRenderWindow->draw(ball_Ref.GetMainBallRef());
+	mainRenderWindow->draw(leftPaddle_Ref.GetMainPaddleRef());
+	mainRenderWindow->draw(rightPaddle_Ref.GetMainPaddleRef());
+	mainRenderWindow->draw(ball_Ref.GetMainBallRef());
 
 	//Rendering the window(Rendering new/current frame)
-	this->mainRenderWindow->display();
+	mainRenderWindow->display();
 }
