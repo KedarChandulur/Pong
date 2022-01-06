@@ -6,7 +6,7 @@
 
 namespace Pong
 {
-	class Paddle : Pong::Common
+	class Paddle : protected Pong::Common
 	{
 	public:
 		void Init(const sf::Color& paddleColor, const float& paddleoffset);
