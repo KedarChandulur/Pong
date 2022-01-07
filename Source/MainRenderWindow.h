@@ -1,6 +1,7 @@
 #ifndef MAINRENDERWINDOW_H
 #define MAINRENDERWINDOW_H
 
+#include "CommonElementsHandler.h"
 #include "Ball.h"
 
 namespace Pong
@@ -31,21 +32,19 @@ namespace Pong
 
 		//Render Window Variable Reference
 		sf::RenderWindow* mainRenderWindow = nullptr;
-		//Event Getter Variable
-		sf::Event eventRef;
-		//Background Sprite
-		sf::Sprite bgSprite;
-		//Background Texture
-		sf::Texture bgTexture;
-		/*sf::RectangleShape bgSprite;*/
-
+		
 		//Clock Reference
 		sf::Clock clock;
+
+		//CommonElementsHandler Reference
+		CommonElementsHandler commonElementsHandler;
 
 		//In Game Elements
 		Paddle leftPaddle_Ref;
 		Paddle rightPaddle_Ref;
 		Ball ball_Ref;
+
+		bool inGame = false;
 	};
 }
 #endif
