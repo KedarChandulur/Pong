@@ -5,10 +5,12 @@
 
 namespace Pong
 {
-	class Ball : Pong::Common
+	class Ball : protected Pong::Common
 	{
 	public:
 		void Init();
+		void SetRandomAngle();
+
 		void CheckForTopAndBottom_BoundryCollision(const float& deltaTime);
 		void CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle);
 		void CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle);

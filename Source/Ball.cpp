@@ -12,8 +12,11 @@ void Pong::Ball::Init()
 	this->mainBall.setOutlineColor(sf::Color::Cyan);
 
 	this->mainBall.setOrigin(ballRadius / 2, ballRadius / 2);
-	this->mainBall.setPosition(Pong::SCREEN_WIDTH / 2, Pong::SCREEN_HEIGHT / 2);
+	this->mainBall.setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f);	
+}
 
+void Pong::Ball::SetRandomAngle()
+{
 	//We are using "std::srand()" for creating randomness in initial ball angle/direction.
 	//Initialise srand() using the current time for preventing srand to return same random value in different application instance(s).
 	//Using static cast to cast from 'time_t' to 'unsigned int', preventing loss of data.
