@@ -29,7 +29,7 @@ namespace Pong
 		//Main Text Ref
 		sf::Text textRef;
 
-		const char textSize = 80;
+		const unsigned short textSize = 80;
 	};
 }
 #endif
