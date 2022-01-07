@@ -12,8 +12,5 @@ namespace Pong
 
 		static const char outLineThickness = 3;
 	};
-	
-	//static unsigned int SCREEN_WIDTH = 1280;
-	//static unsigned int SCREEN_HEIGHT = 720;
 }
 #endif
