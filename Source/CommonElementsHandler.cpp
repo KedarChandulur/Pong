@@ -21,7 +21,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	textRef.setCharacterSize(textSize);
 	//textRef.setFillColor(sf::Color::Green);
 	textRef.setFillColor(sf::Color(128U,128U,128U));
-	textRef.setOrigin(textSize / 2, textSize / 2);
+	textRef.setOrigin(textSize / 2.0f, textSize / 2.0f);
 	textRef.setPosition(Pong::SCREEN_WIDTH * 0.25f, Pong::SCREEN_HEIGHT * 0.40f);
 	//textRef.setPosition(Pong::SCREEN_WIDTH * 0.30f, Pong::SCREEN_HEIGHT / 2);
 
