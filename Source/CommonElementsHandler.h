@@ -2,7 +2,8 @@
 #define COMMONELEMENTSHANDLER_H
 
 #include "GlobalVariables.h"
-#include <SFML/Graphics.hpp>
+#include "TextHandler.h"
+#include <SFML/Audio.hpp>
 
 namespace Pong
 {
@@ -12,11 +13,18 @@ namespace Pong
 		//Returns true if initialization is successfull
 		bool Init(sf::RenderWindow& mainRenderWindow);
 		void UpdateBGSpriteScaleBasedOnRes();
+		void Render(sf::RenderWindow& mainRenderWindow);
 
-		const sf::Sprite& GetBGSpriteRef() const;
+		sf::Sound& GetSoundObject();
 		sf::Text& GetMainTextRef();
-	private:
+		//sf::Text& GetStartGameTextRef();
+		//sf::Text& GetQuitGameTextRef();
 
+		//Start Game Text Ref
+		TextHandler startgame_Text;
+		//Quit Game Text Ref
+		TextHandler quitgame_Text;
+	private:
 		//Background Sprite
 		sf::Sprite bgSprite;
 		/*sf::RectangleShape bgSprite;*/
@@ -24,12 +32,17 @@ namespace Pong
 		sf::Texture bgTexture;
 		//Icon and main menu image
 		sf::Image iconImage_Ref;
+
 		//Custom Font
 		sf::Font fontRef;
-		//Main Text Ref
-		sf::Text textRef;
+		//Title Text Ref
+		TextHandler title_Text;
+		//Buffer which loads and stores audio file of ball bounce
+		sf::SoundBuffer ballSB;
+		//Sfml sound object for playing the ball bounce sound
+		sf::Sound ballBounceSound;
 
-		const unsigned short textSize = 80;
+		const unsigned short textSize = 30;
 	};
 }
 #endif
