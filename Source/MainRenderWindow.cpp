@@ -24,8 +24,10 @@ bool Pong::MainRenderWindow::Initialize()
 		return false;
 
 	//Paddle Initialization
-	leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-	rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+	//leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
+	//rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+	leftPaddle_Ref.Init(true);
+	rightPaddle_Ref.Init(false);
 
 	//Ball Initialization
 	ball_Ref.Init();
@@ -37,10 +39,16 @@ const bool Pong::MainRenderWindow::IsGameWindowOpen() const
 	return mainRenderWindow->isOpen();
 }
 
-void Pong::MainRenderWindow::UpdateGame()
+void Pong::MainRenderWindow::RunMainGameLoop()
 {
 	float deltaTime = clock.restart().asSeconds();
+	ProcessEvents(deltaTime);
+	Update(deltaTime);
+	Render();
+}
 
+void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
+{
 	sf::Event eventRef;
 
 	while (mainRenderWindow->pollEvent(eventRef))
@@ -58,20 +66,68 @@ void Pong::MainRenderWindow::UpdateGame()
 			}
 			else if (eventRef.key.code == sf::Keyboard::Space)
 			{
-				if (!inGame)
+				if (!Pong::inGame)
 				{
-					inGame = true;
-					clock.restart();
+					if (commonElementsHandler.startgame_Text.GetIsSelected())
+					{
+						Pong::inGame = true;
+						clock.restart();
 
-					leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-					rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+						//leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
+						//rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
+						leftPaddle_Ref.Init(true);
+						rightPaddle_Ref.Init(false);
 
-					ball_Ref.Init();
-					ball_Ref.SetRandomAngle();
+						ball_Ref.Init();
+						ball_Ref.SetRandomAngle();
+						commonElementsHandler.GetSoundObject().play();
+						/*auto playsound = commonElementsHandler.GetSoundObject();
+						playsound.play();*/
+					}
+					else if (commonElementsHandler.quitgame_Text.GetIsSelected())
+					{
+						QuitGame();
+					}
 				}
 			}
 
-			if (inGame)
+			if (eventRef.key.code == sf::Keyboard::Num1 || eventRef.key.code == sf::Keyboard::Numpad1)
+			{
+				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(1);
+				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Low);
+			}
+			else if (eventRef.key.code == sf::Keyboard::Num2 || eventRef.key.code == sf::Keyboard::Numpad2)
+			{
+				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(2);
+				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Medium);
+			}
+			else if (eventRef.key.code == sf::Keyboard::Num3 || eventRef.key.code == sf::Keyboard::Numpad3)
+			{
+				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(3);
+				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::High);
+			}
+			else if (eventRef.key.code == sf::Keyboard::Num4 || eventRef.key.code == sf::Keyboard::Numpad4)
+			{
+				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(4);
+				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::VeryHigh);
+			}
+
+			if (!inGame)
+			{
+				if (eventRef.key.code == sf::Keyboard::Up)
+				{
+					commonElementsHandler.GetSoundObject().play();
+					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
+					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
+				}
+				else if (eventRef.key.code == sf::Keyboard::Down)
+				{
+					commonElementsHandler.GetSoundObject().play();
+					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
+					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
+				}
+			}
+			else
 			{
 				if (eventRef.key.code == sf::Keyboard::W)
 				{
@@ -81,14 +137,14 @@ void Pong::MainRenderWindow::UpdateGame()
 				{
 					leftPaddle_Ref.MoveDown(deltaTime);
 				}
-				else if (eventRef.key.code == sf::Keyboard::Up)
+				/*else if (eventRef.key.code == sf::Keyboard::Up)
 				{
 					rightPaddle_Ref.MoveUp(deltaTime);
 				}
 				else if (eventRef.key.code == sf::Keyboard::Down)
 				{
 					rightPaddle_Ref.MoveDown(deltaTime);
-				}
+				}*/
 			}
 
 			break;
@@ -100,26 +156,34 @@ void Pong::MainRenderWindow::UpdateGame()
 			break;
 		}
 	}
+}
 
-	if (inGame)
+void Pong::MainRenderWindow::Update(const float& deltaTime)
+{
+	if (Pong::inGame)
 	{
 		if (ball_Ref.CheckForRight_BoundryCollision())
 		{
-			inGame = false;
+			Pong::inGame = false;
 			commonElementsHandler.GetMainTextRef().setString("Player-1 wins!\nPress space to restart or\nescape to exit");
 		}
 		else if (ball_Ref.CheckForLeft_BoundryCollision())
 		{
-			inGame = false;
+			Pong::inGame = false;
 			commonElementsHandler.GetMainTextRef().setString("Player-2 wins!\nPress space to restart or\nescape to exit");
 		}
 
+		ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
 		ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
-		ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref);
-		ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref);
+		if (ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref))
+		{
+			commonElementsHandler.GetSoundObject().play();
+		}
+		if (ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref))
+		{
+			commonElementsHandler.GetSoundObject().play();
+		}
 	}
-
-	Render();
 }
 
 void Pong::MainRenderWindow::Render()
@@ -128,18 +192,14 @@ void Pong::MainRenderWindow::Render()
 	mainRenderWindow->clear();
 	//Drawing background sprite(based on menu or ingame).
 
-	if (!inGame)
+	commonElementsHandler.Render(*mainRenderWindow);
+
+	if(inGame)
 	{
-		//Drawing menu background sprite.
-		mainRenderWindow->draw(commonElementsHandler.GetMainTextRef());
-	}
-	else
-	{
-		mainRenderWindow->draw(commonElementsHandler.GetBGSpriteRef());
 		//Rendering paddles and ball
-		mainRenderWindow->draw(leftPaddle_Ref.GetMainPaddleRef());
-		mainRenderWindow->draw(rightPaddle_Ref.GetMainPaddleRef());
-		mainRenderWindow->draw(ball_Ref.GetMainBallRef());
+		leftPaddle_Ref.Render(*mainRenderWindow);
+		rightPaddle_Ref.Render(*mainRenderWindow);
+		ball_Ref.Render(*mainRenderWindow);
 	}
 
 	//Rendering the window(Rendering new/current frame)
