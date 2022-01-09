@@ -3,7 +3,25 @@
 
 namespace Pong
 {
-	static unsigned short SCREEN_WIDTH = 1280;
-	static unsigned short SCREEN_HEIGHT = 720;
+	//Variables are in Caps just for visual representation/differentiation
+	extern unsigned short SCREEN_WIDTH;
+	extern unsigned short SCREEN_HEIGHT;
+
+	extern bool inGame;
+}
+
+namespace Pong
+{
+	namespace GlobalEnums
+	{
+		//Each level/difficulty updates the paddle's speed by removing the level(enum value) amount
+		enum DifficultyLevel : unsigned short
+		{
+			VeryHigh = 50,
+			High = 100,
+			Medium = 150,
+			Low = 200,
+		};
+	}
 }
 #endif
