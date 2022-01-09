@@ -2,6 +2,9 @@
 
 int main()
 {
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetBreakAlloc(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	Pong::MainRenderWindow mainWindow;
 
 	if (!mainWindow.Initialize())
@@ -11,7 +14,7 @@ int main()
 
 	while (mainWindow.IsGameWindowOpen())
 	{
-		mainWindow.UpdateGame();
+		mainWindow.RunMainGameLoop();
 	}
 
 	return EXIT_SUCCESS;
