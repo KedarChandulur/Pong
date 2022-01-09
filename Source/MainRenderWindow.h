@@ -20,11 +20,15 @@ namespace Pong
 		bool Initialize();
 
 		//Main Game Loop
-		void UpdateGame();
+		void RunMainGameLoop();
 
 		//Checks if Game Window is open
 		const bool IsGameWindowOpen() const;
 	private:
+		//Process basic input events
+		void ProcessEvents(const float& deltaTime);
+		//Main Update Loop
+		void Update(const float& deltaTime);
 		//Main Renderer Loop
 		void Render();
 		//Closes the Main Game Window
@@ -43,8 +47,6 @@ namespace Pong
 		Paddle leftPaddle_Ref;
 		Paddle rightPaddle_Ref;
 		Ball ball_Ref;
-
-		bool inGame = false;
 	};
 }
 #endif
