@@ -39,7 +39,8 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	quitgame_Text.GetTextRef().setFont(fontRef);
 
 	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.\nSet the AI Level using the keys below\n1(Min) - 4(Max)");
-	title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.");
+	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.");
+	title_Text.GetTextRef().setString("Hello, Welcome to Pong");
 	startgame_Text.GetTextRef().setString("Start");
 	quitgame_Text.GetTextRef().setString("Quit");
 
