@@ -2,9 +2,7 @@
 
 Pong::MainRenderWindow::MainRenderWindow()
 {
-	//mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
-	//mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,32U), "Pong Game", sf::Style::Default);
-	mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH,Pong::SCREEN_HEIGHT,48U), "Pong Game", sf::Style::Default);
+	mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT, 32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
 	mainRenderWindow->setVerticalSyncEnabled(true);
 }
 
