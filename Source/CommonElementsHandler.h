@@ -40,9 +40,7 @@ namespace Pong
 		//Buffer which loads and stores audio file of ball bounce
 		sf::SoundBuffer ballSB;
 		//Sfml sound object for playing the ball bounce sound
-		sf::Sound ballBounceSound;
-
-		const unsigned short textSize = 30;
+		sf::Sound ballBounceSound;		
 	};
 }
 #endif

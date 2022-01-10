@@ -47,9 +47,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	startgame_Text.GetTextRef().setOrigin(startgame_Text.GetTextRef().getLocalBounds().width / 2, startgame_Text.GetTextRef().getLocalBounds().height / 2);
 	quitgame_Text.GetTextRef().setOrigin(quitgame_Text.GetTextRef().getLocalBounds().width / 2, quitgame_Text.GetTextRef().getLocalBounds().height / 2);
 
-	title_Text.GetTextRef().setCharacterSize(textSize * 2);
-	startgame_Text.GetTextRef().setCharacterSize(textSize);
-	quitgame_Text.GetTextRef().setCharacterSize(textSize);
+	title_Text.GetTextRef().setCharacterSize(Pong::TextHandler::textSize * 2);
+	//startgame_Text.GetTextRef().setCharacterSize(textSize);
+	//quitgame_Text.GetTextRef().setCharacterSize(textSize);
 
 	title_Text.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
 	//startgame_Text.GetTextRef().setFillColor(sf::Color::Green);
@@ -57,9 +57,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	//quitgame_Text.GetTextRef().setFillColor(sf::Color::Red);
 	quitgame_Text.SetIsSelected(false);
 
-	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - textSize * 4, textSize * 4);
-	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f);
-	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (textSize * 2));
+	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
+	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 25.0f);
+	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 25.0f));
 
 	ballBounceSound.setBuffer(ballSB);
 	ballBounceSound.setVolume(50.0f);
