@@ -38,10 +38,15 @@ void Pong::Paddle::Init(bool isFirstPaddle)
 
 	speed = defaultSpeed;
 
-	if (isFirstPaddle || !playAgainstAI)
+	if (isFirstPaddle)
+		ValidateManualSpeed();
+	else
+		ResetSpeed();
+
+	/*if (isFirstPaddle || !playAgainstAI)
 		ValidateManualSpeed();
 	else if (playAgainstAI)
-		ResetSpeed();
+		ResetSpeed();*/
 }
 
 void Pong::Paddle::ResetSpeed()
