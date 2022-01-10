@@ -68,6 +68,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 			{
 				if (!Pong::inGame)
 				{
+					commonElementsHandler.startgame_Text.GetTextRef().setString("Restart");
 					if (commonElementsHandler.startgame_Text.GetIsSelected())
 					{
 						Pong::inGame = true;
