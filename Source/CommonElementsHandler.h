@@ -12,7 +12,7 @@ namespace Pong
 	public:
 		//Returns true if initialization is successfull
 		bool Init(sf::RenderWindow& mainRenderWindow);
-		void UpdateBGSpriteScaleBasedOnRes();
+		//void UpdateBGSpriteScaleBasedOnRes();
 		void Render(sf::RenderWindow& mainRenderWindow);
 
 		sf::Sound& GetSoundObject();

@@ -4,8 +4,8 @@
 namespace Pong
 {
 	//Variables are in Caps just for visual representation/differentiation
-	extern unsigned short SCREEN_WIDTH;
-	extern unsigned short SCREEN_HEIGHT;
+	extern const unsigned short SCREEN_WIDTH;
+	extern const unsigned short SCREEN_HEIGHT;
 
 	extern bool inGame;
 }

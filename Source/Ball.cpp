@@ -87,6 +87,11 @@ void Pong::Ball::Render(sf::RenderWindow& mainRenderWindow) const
 	mainRenderWindow.draw(mainBall);
 }
 
+//const void Pong::Ball::OnResizeEvent() const
+//{
+//
+//}
+
 const bool& Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle)
 {
 	// Check the collisions between the mainBall and the paddles

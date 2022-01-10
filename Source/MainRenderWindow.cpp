@@ -22,8 +22,6 @@ bool Pong::MainRenderWindow::Initialize()
 		return false;
 
 	//Paddle Initialization
-	//leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-	//rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
 	leftPaddle_Ref.Init(true);
 	rightPaddle_Ref.Init(false);
 
@@ -169,12 +167,14 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 			}
 
 			break;
-		case sf::Event::EventType::Resized:
-			SCREEN_WIDTH = static_cast<unsigned short>(eventRef.size.width);
-			SCREEN_HEIGHT = static_cast<unsigned short>(eventRef.size.height);
+		//case sf::Event::EventType::Resized:
+		//	SCREEN_WIDTH = static_cast<unsigned short>(eventRef.size.width);
+		//	SCREEN_HEIGHT = static_cast<unsigned short>(eventRef.size.height);
 
-			commonElementsHandler.UpdateBGSpriteScaleBasedOnRes();
-			break;
+		//	//leftPaddle_Ref.OnResizeEvent();
+		//	//rightPaddle_Ref.OnResizeEvent();
+		//	//ball_Ref.OnResizeEvent();
+		//	break;
 		}
 	}
 }

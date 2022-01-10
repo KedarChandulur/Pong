@@ -22,7 +22,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		return false;
 	}
 
-	bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
+	//bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
 
 	if (!bgTexture.loadFromFile("Resources/Pong_BG.png"))
 	{
@@ -32,7 +32,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 
 	printf("%s", "Background texture loaded successfully.\n");
 	bgSprite.setTexture(bgTexture);
-	UpdateBGSpriteScaleBasedOnRes();
+	bgSprite.setScale(
+		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
 
 	title_Text.GetTextRef().setFont(fontRef);
 	startgame_Text.GetTextRef().setFont(fontRef);
@@ -59,8 +61,8 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	quitgame_Text.SetIsSelected(false);
 
 	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
-	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 25.0f);
-	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 25.0f));
+	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 50.0f);
+	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 50.0f));
 
 	ballBounceSound.setBuffer(ballSB);
 	ballBounceSound.setVolume(50.0f);
@@ -68,12 +70,12 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	return true;
 }
 
-void Pong::CommonElementsHandler::UpdateBGSpriteScaleBasedOnRes()
-{
-	bgSprite.setScale(
-		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
-		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
-}
+//void Pong::CommonElementsHandler::UpdateBGSpriteScaleBasedOnRes()
+//{
+//	bgSprite.setScale(
+//		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+//		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
+//}
 
 void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 {

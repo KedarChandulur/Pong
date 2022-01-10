@@ -25,6 +25,7 @@ namespace Pong
 		const bool& CheckForRight_BoundryCollision() const;
 
 		void Render(sf::RenderWindow& mainRenderWindow) const override;
+		//const void OnResizeEvent() const override;
 	private:
 		sf::CircleShape mainBall;
 

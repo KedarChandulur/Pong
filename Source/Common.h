@@ -10,6 +10,7 @@ namespace Pong
 	{
 	public:
 		virtual void Render(sf::RenderWindow& mainRenderWindow) const = 0;
+		//virtual const void OnResizeEvent() const = 0;
 	protected:
 		float speed = 225.0f;
 
