@@ -22,7 +22,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		return false;
 	}
 
-	bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
+	//bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
 
 	if (!bgTexture.loadFromFile("Resources/Pong_BG.png"))
 	{
@@ -32,14 +32,17 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 
 	printf("%s", "Background texture loaded successfully.\n");
 	bgSprite.setTexture(bgTexture);
-	UpdateBGSpriteScaleBasedOnRes();
+	bgSprite.setScale(
+		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
 
 	title_Text.GetTextRef().setFont(fontRef);
 	startgame_Text.GetTextRef().setFont(fontRef);
 	quitgame_Text.GetTextRef().setFont(fontRef);
 
 	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.\nSet the AI Level using the keys below\n1(Min) - 4(Max)");
-	title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.");
+	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.");
+	title_Text.GetTextRef().setString("Hello, Welcome to Pong");
 	startgame_Text.GetTextRef().setString("Start");
 	quitgame_Text.GetTextRef().setString("Quit");
 
@@ -47,9 +50,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	startgame_Text.GetTextRef().setOrigin(startgame_Text.GetTextRef().getLocalBounds().width / 2, startgame_Text.GetTextRef().getLocalBounds().height / 2);
 	quitgame_Text.GetTextRef().setOrigin(quitgame_Text.GetTextRef().getLocalBounds().width / 2, quitgame_Text.GetTextRef().getLocalBounds().height / 2);
 
-	title_Text.GetTextRef().setCharacterSize(textSize * 2);
-	startgame_Text.GetTextRef().setCharacterSize(textSize);
-	quitgame_Text.GetTextRef().setCharacterSize(textSize);
+	title_Text.GetTextRef().setCharacterSize(Pong::TextHandler::textSize * 2);
+	//startgame_Text.GetTextRef().setCharacterSize(textSize);
+	//quitgame_Text.GetTextRef().setCharacterSize(textSize);
 
 	title_Text.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
 	//startgame_Text.GetTextRef().setFillColor(sf::Color::Green);
@@ -57,9 +60,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	//quitgame_Text.GetTextRef().setFillColor(sf::Color::Red);
 	quitgame_Text.SetIsSelected(false);
 
-	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - textSize * 4, textSize * 4);
-	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f);
-	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (textSize * 2));
+	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
+	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 50.0f);
+	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 50.0f));
 
 	ballBounceSound.setBuffer(ballSB);
 	ballBounceSound.setVolume(50.0f);
@@ -67,12 +70,12 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	return true;
 }
 
-void Pong::CommonElementsHandler::UpdateBGSpriteScaleBasedOnRes()
-{
-	bgSprite.setScale(
-		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
-		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
-}
+//void Pong::CommonElementsHandler::UpdateBGSpriteScaleBasedOnRes()
+//{
+//	bgSprite.setScale(
+//		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+//		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
+//}
 
 void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 {

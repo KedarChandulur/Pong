@@ -3,43 +3,48 @@
 #include <iostream>
 #include <cmath>
 
-//void Pong::Paddle::Init(const sf::Color& paddleColor, const float& paddleoffset)
-//{
-//	//mainPaddle.setSize(paddleSize);
-//	mainPaddle.setSize(paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
-//
-//	mainPaddle.setOutlineThickness(outLineThickness);
-//	mainPaddle.setOutlineColor(paddleColor);
-//	mainPaddle.setOrigin(paddleSize/2.0f);
-//	mainPaddle.setPosition(Pong::SCREEN_WIDTH * paddleoffset, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
-//
-//	speed = defaultSpeed;
-//}
-
-//leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-//rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
 void Pong::Paddle::Init(bool isFirstPaddle)
 {
-	//mainPaddle.setSize(paddleSize);
 	mainPaddle.setSize(paddleSize - sf::Vector2f(outLineThickness, outLineThickness));
 
 	mainPaddle.setOutlineThickness(outLineThickness);
 	mainPaddle.setOrigin(paddleSize / 2.0f);
 
-	if(isFirstPaddle)
+	if (isFirstPaddle)
 		mainPaddle.setOutlineColor(sf::Color::Green);
 	else
 		mainPaddle.setOutlineColor(sf::Color::Magenta);
 
+	//if (isFirstPaddle)
+	//	mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.05f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
+	//else
+	//	mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.951f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
+
 	if (isFirstPaddle)
-		mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.05f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
+		mainPaddle.setPosition(56.0f, Pong::SCREEN_HEIGHT / 2.0f - 50.0f);
 	else
-		mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.951f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
+		mainPaddle.setPosition(Pong::SCREEN_WIDTH - 51.5f, Pong::SCREEN_HEIGHT / 2.0f - 50.0f);
 
 	if (isFirstPaddle)
-		speed += 500;
+		ValidateManualSpeed();
+	else
+		ResetSpeed();
 
+	/*if (isFirstPaddle || !playAgainstAI)
+		ValidateManualSpeed();
+	else if (playAgainstAI)
+		ResetSpeed();*/
+}
+
+void Pong::Paddle::ResetSpeed()
+{
 	speed = defaultSpeed;
+}
+
+void Pong::Paddle::ValidateManualSpeed()
+{
+	ResetSpeed();
+	speed += Pong::GlobalEnums::DifficultyLevel::Low;
 }
 
 void Pong::Paddle::MoveUp(const float& deltaTime)
@@ -58,36 +63,10 @@ void Pong::Paddle::MoveDown(const float& deltaTime)
 	}
 }
 
-//void Pong::Paddle::UpdateAIPaddleSpeedEnum(const unsigned short& difficultyType)
-//{
-//	difficultyLevel = (Pong::GlobalEnums::DifficultyLevel)difficultyType;
-//}
-
 void Pong::Paddle::UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLevel& difficultyLevel)
 {
 	this->difficultyLevel = difficultyLevel;
 }
-
-//const void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
-//{
-//	const float& currentPosition = mainPaddle.getPosition().y;
-//	//float targetPosition = currentPosition + (speed * deltaTime);
-//	const float& targetPosition = currentPosition + speed * deltaTime;
-//	float randomLerpTimerValue = rand() % 10 * 0.1f;
-//	//printf("%f\n", randomLerpTimerValue);
-//	
-//	const float& RandomLerpValue = Lerp(0.15f,0.35f, randomLerpTimerValue);
-//	const float& updatedPositionWithLerp = Lerp(currentPosition, targetPosition, RandomLerpValue);
-//
-//	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
-//
-//	//mainPaddle.move(0.f, speed * deltaTime);
-//}
-
-//const void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
-//{
-//	mainPaddle.move(0.f, speed * deltaTime);
-//}
 
 const void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
@@ -140,3 +119,4 @@ const sf::Time& Pong::Paddle::GetMaxHitTime()
 sf::Vector2f Pong::Paddle::paddleSize = sf::Vector2f(25.0f, 100.0f);
 sf::Time Pong::Paddle::max_AI_hitTime = sf::seconds(0.1f);
 sf::Clock Pong::Paddle::AI_Timer;
+bool Pong::Paddle::playAgainstAI = true;

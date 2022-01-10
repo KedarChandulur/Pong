@@ -12,7 +12,7 @@ namespace Pong
 	public:
 		//Returns true if initialization is successfull
 		bool Init(sf::RenderWindow& mainRenderWindow);
-		void UpdateBGSpriteScaleBasedOnRes();
+		//void UpdateBGSpriteScaleBasedOnRes();
 		void Render(sf::RenderWindow& mainRenderWindow);
 
 		sf::Sound& GetSoundObject();
@@ -40,9 +40,7 @@ namespace Pong
 		//Buffer which loads and stores audio file of ball bounce
 		sf::SoundBuffer ballSB;
 		//Sfml sound object for playing the ball bounce sound
-		sf::Sound ballBounceSound;
-
-		const unsigned short textSize = 30;
+		sf::Sound ballBounceSound;		
 	};
 }
 #endif
