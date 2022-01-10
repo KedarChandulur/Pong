@@ -138,18 +138,14 @@ void Pong::Ball::UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& 
 		rightPaddle.MoveAIPaddle(deltaTime);
 	}
 
-	//if (rightPaddle.GetAITimerRef().getElapsedTime() > rightPaddle.max_AI_hitTime)
 	if (rightPaddle.GetAITimerRef().getElapsedTime() > rightPaddle.GetMaxHitTime())
 	{
 		rightPaddle.GetAITimerRef().restart();
 		if (mainBall.getPosition().y + ballRadius > rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2)
 			rightPaddle.UpdateAIPaddleSpeed(1);
-			//rightPaddle.UpdateAIPaddleSpeed(1, deltaTime);
 		else if (mainBall.getPosition().y - ballRadius < rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2)
 			rightPaddle.UpdateAIPaddleSpeed(-1);
-			//rightPaddle.UpdateAIPaddleSpeed(-1, deltaTime);
 		else
 			rightPaddle.UpdateAIPaddleSpeed(0);
-			//rightPaddle.UpdateAIPaddleSpeed(0, deltaTime);
 	}
 }
