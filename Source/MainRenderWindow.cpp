@@ -61,8 +61,16 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 		case sf::Event::EventType::KeyPressed:
 			if (eventRef.key.code == sf::Keyboard::Escape)
 			{
-				QuitGame();
-				break;
+				if (inGame)
+				{
+					inGame = false;
+					commonElementsHandler.startgame_Text.GetTextRef().setString("Start");
+				}
+				else
+				{
+					QuitGame();
+					break;
+				}
 			}
 			else if (eventRef.key.code == sf::Keyboard::Space)
 			{
@@ -88,29 +96,41 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 					else if (commonElementsHandler.quitgame_Text.GetIsSelected())
 					{
 						QuitGame();
+						break;
 					}
 				}
 			}
+			else if (eventRef.key.code == sf::Keyboard::C)
+			{
+				rightPaddle_Ref.playAgainstAI = !rightPaddle_Ref.playAgainstAI;
+				if (!rightPaddle_Ref.playAgainstAI)
+					rightPaddle_Ref.ValidateManualSpeed();
+				else
+					rightPaddle_Ref.ResetSpeed();
+			}
 
-			if (eventRef.key.code == sf::Keyboard::Num1 || eventRef.key.code == sf::Keyboard::Numpad1)
+			if (rightPaddle_Ref.playAgainstAI)
 			{
-				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(1);
-				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Low);
-			}
-			else if (eventRef.key.code == sf::Keyboard::Num2 || eventRef.key.code == sf::Keyboard::Numpad2)
-			{
-				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(2);
-				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Medium);
-			}
-			else if (eventRef.key.code == sf::Keyboard::Num3 || eventRef.key.code == sf::Keyboard::Numpad3)
-			{
-				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(3);
-				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::High);
-			}
-			else if (eventRef.key.code == sf::Keyboard::Num4 || eventRef.key.code == sf::Keyboard::Numpad4)
-			{
-				//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(4);
-				rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::VeryHigh);
+				if (eventRef.key.code == sf::Keyboard::Num1 || eventRef.key.code == sf::Keyboard::Numpad1)
+				{
+					//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(1);
+					rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Low);
+				}
+				else if (eventRef.key.code == sf::Keyboard::Num2 || eventRef.key.code == sf::Keyboard::Numpad2)
+				{
+					//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(2);
+					rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::Medium);
+				}
+				else if (eventRef.key.code == sf::Keyboard::Num3 || eventRef.key.code == sf::Keyboard::Numpad3)
+				{
+					//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(3);
+					rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::High);
+				}
+				else if (eventRef.key.code == sf::Keyboard::Num4 || eventRef.key.code == sf::Keyboard::Numpad4)
+				{
+					//rightPaddle_Ref.UpdateAIPaddleSpeedEnum(4);
+					rightPaddle_Ref.UpdateAIPaddleSpeedEnum(Pong::GlobalEnums::DifficultyLevel::VeryHigh);
+				}
 			}
 
 			if (!inGame)
@@ -138,14 +158,16 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 				{
 					leftPaddle_Ref.MoveDown(deltaTime);
 				}
-				/*else if (eventRef.key.code == sf::Keyboard::Up)
+				else if (eventRef.key.code == sf::Keyboard::Up)
 				{
-					rightPaddle_Ref.MoveUp(deltaTime);
+					if(!rightPaddle_Ref.playAgainstAI)
+						rightPaddle_Ref.MoveUp(deltaTime);
 				}
 				else if (eventRef.key.code == sf::Keyboard::Down)
 				{
-					rightPaddle_Ref.MoveDown(deltaTime);
-				}*/
+					if (!rightPaddle_Ref.playAgainstAI)
+						rightPaddle_Ref.MoveDown(deltaTime);
+				}
 			}
 
 			break;
@@ -174,7 +196,9 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 			commonElementsHandler.GetMainTextRef().setString("Player-2 wins!\nPress space to restart or\nescape to exit");
 		}
 
-		ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
+		if (rightPaddle_Ref.playAgainstAI)
+			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
+
 		ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
 		if (ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref))
 		{

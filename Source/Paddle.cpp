@@ -26,7 +26,7 @@ void Pong::Paddle::Init(bool isFirstPaddle)
 	mainPaddle.setOutlineThickness(outLineThickness);
 	mainPaddle.setOrigin(paddleSize / 2.0f);
 
-	if(isFirstPaddle)
+	if (isFirstPaddle)
 		mainPaddle.setOutlineColor(sf::Color::Green);
 	else
 		mainPaddle.setOutlineColor(sf::Color::Magenta);
@@ -36,10 +36,23 @@ void Pong::Paddle::Init(bool isFirstPaddle)
 	else
 		mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.951f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
 
-	if (isFirstPaddle)
-		speed += 500;
-
 	speed = defaultSpeed;
+
+	if (isFirstPaddle || !playAgainstAI)
+		ValidateManualSpeed();
+	else if (playAgainstAI)
+		ResetSpeed();
+}
+
+void Pong::Paddle::ResetSpeed()
+{
+	speed = defaultSpeed;
+}
+
+void Pong::Paddle::ValidateManualSpeed()
+{
+	ResetSpeed();
+	speed += Pong::GlobalEnums::DifficultyLevel::Low;
 }
 
 void Pong::Paddle::MoveUp(const float& deltaTime)
@@ -140,3 +153,4 @@ const sf::Time& Pong::Paddle::GetMaxHitTime()
 sf::Vector2f Pong::Paddle::paddleSize = sf::Vector2f(25.0f, 100.0f);
 sf::Time Pong::Paddle::max_AI_hitTime = sf::seconds(0.1f);
 sf::Clock Pong::Paddle::AI_Timer;
+bool Pong::Paddle::playAgainstAI = true;

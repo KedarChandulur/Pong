@@ -23,6 +23,10 @@ namespace Pong
 		void MoveDown(const float& deltaTime);
 		//void UpdateAIPaddleSpeedEnum(const unsigned short& difficultyType);
 		void UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLevel& difficultyType);
+		//Used for reseting or re-initializing speed variable
+		void ValidateManualSpeed();
+		//Sets speed variable to default value
+		void ResetSpeed();
 
 		//const void UpdateAIPaddleSpeed(const short& updatedSpeed, const float& deltaTime);
 		const void UpdateAIPaddleSpeed(const short& updatedSpeed);
@@ -41,19 +45,19 @@ namespace Pong
 		//const sf::Time max_AI_hitTime = sf::seconds(0.1f);
 		
 		void Render(sf::RenderWindow& mainRenderWindow) const override;
+
+		static bool playAgainstAI;
 	private:
 		float Lerp(const float& a, const float& b, const float& f);
 
 		sf::RectangleShape mainPaddle;
-		Pong::GlobalEnums::DifficultyLevel difficultyLevel = Pong::GlobalEnums::DifficultyLevel::VeryHigh;
+		Pong::GlobalEnums::DifficultyLevel difficultyLevel = Pong::GlobalEnums::DifficultyLevel::Medium;
 
 		static sf::Vector2f paddleSize;
-
-		static const unsigned short defaultSpeed = 1000U;
-
 		static sf::Clock AI_Timer;
 		static sf::Time max_AI_hitTime;
-		static bool AI_turn;
+
+		static const unsigned short defaultSpeed = 1000U;
 	};
 }
 #endif
