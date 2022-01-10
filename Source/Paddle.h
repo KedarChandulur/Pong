@@ -45,7 +45,6 @@ namespace Pong
 		//const sf::Time max_AI_hitTime = sf::seconds(0.1f);
 		
 		void Render(sf::RenderWindow& mainRenderWindow) const override;
-		//const void OnResizeEvent() const override;
 
 		static bool playAgainstAI;
 	private:

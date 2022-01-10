@@ -167,14 +167,6 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 			}
 
 			break;
-		//case sf::Event::EventType::Resized:
-		//	SCREEN_WIDTH = static_cast<unsigned short>(eventRef.size.width);
-		//	SCREEN_HEIGHT = static_cast<unsigned short>(eventRef.size.height);
-
-		//	//leftPaddle_Ref.OnResizeEvent();
-		//	//rightPaddle_Ref.OnResizeEvent();
-		//	//ball_Ref.OnResizeEvent();
-		//	break;
 		}
 	}
 }

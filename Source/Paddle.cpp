@@ -86,12 +86,6 @@ void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow) const
 	mainRenderWindow.draw(mainPaddle);
 }
 
-//const void Pong::Paddle::OnResizeEvent() const
-//{
-//	printf("%hu\n", SCREEN_WIDTH);
-//	printf("%hu\n", SCREEN_HEIGHT);
-//}
-
 float Pong::Paddle::Lerp(const float& a, const float& b, const float& t)
 {
 	return (a * (1.0f - t)) + (b * t);
