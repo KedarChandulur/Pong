@@ -9,6 +9,8 @@ namespace Pong
 	struct Common
 	{
 	public:
+		Common() = default;
+		virtual ~Common() = default;
 		virtual void Render(sf::RenderWindow& mainRenderWindow) const = 0;
 	protected:
 		float speed = 225.0f;
