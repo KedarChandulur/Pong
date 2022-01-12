@@ -1,38 +1,55 @@
 #include "CommonElementsHandler.h"
 #include "GlobalVariables.h"
 
+//Returning false only for font loading because with all other elements not loaded the game will be still played
+//But without font, game's menu text itself is not visible - so returning false only on font failure.
 bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 {
-	if (!iconImage_Ref.loadFromFile("Resources/pong_icon.png"))
-		printf("%s", "Error loading the Icon Image.\n");
-	else
-	{
-		printf("%s", "Icon Image loaded.\n");
-		mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
-	}
-
 	if (!fontRef.loadFromFile("Resources/Pacifico-Regular.ttf"))
 	{
 		printf("%s", "Error loading the Font.\n");
 		return false;
 	}
+	else
+	{
+		printf("%s", "Font loaded.\n");
+	}
 
-	printf("%s", "Font loaded.\n");
+	if (!iconImage_Ref.loadFromFile("Resources/pong_icon.png"))
+	{
+		printf("%s", "Error loading the Icon Image.\n");
+		//return false;
+	}
+	else
+	{
+		printf("%s", "Icon Image loaded.\n");
+		mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
+	}
 	
 	if (!ballSB.loadFromFile("Resources/mixkit-game-ball-tap-2073.wav"))
 	{
-		return false;
+		printf("%s", "Error loading the Audio clip.\n");
+		//return false;
 	}
-
-	//bgTexture.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT);
+	else
+	{
+		printf("%s", "Audio clip loaded.\n");
+	}
 
 	if (!bgTexture.loadFromFile("Resources/Pong_BG.png"))
 	{
 		printf("%s", "Error loading the background texture.\n");
-		return false;
+		//return false;
+
+		sf::Image tempImage = sf::Image();
+		tempImage.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT, sf::Color::Blue);		
+		bgTexture.loadFromImage(tempImage);
+	}
+	else
+	{
+		printf("%s", "Background texture loaded successfully.\n");
 	}
 
-	printf("%s", "Background texture loaded successfully.\n");
 	bgSprite.setTexture(bgTexture);
 	bgSprite.setScale(
 		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
@@ -42,8 +59,6 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	startgame_Text.GetTextRef().setFont(fontRef);
 	quitgame_Text.GetTextRef().setFont(fontRef);
 
-	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.\nSet the AI Level using the keys below\n1(Min) - 4(Max)");
-	//title_Text.GetTextRef().setString("Hello, Welcome to Pong\nPress Space to play.");
 	title_Text.GetTextRef().setString("Hello, Welcome to Pong");
 	startgame_Text.GetTextRef().setString("Start");
 	quitgame_Text.GetTextRef().setString("Quit");
@@ -53,13 +68,9 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	quitgame_Text.GetTextRef().setOrigin(quitgame_Text.GetTextRef().getLocalBounds().width / 2, quitgame_Text.GetTextRef().getLocalBounds().height / 2);
 
 	title_Text.GetTextRef().setCharacterSize(Pong::TextHandler::textSize * 2);
-	//startgame_Text.GetTextRef().setCharacterSize(textSize);
-	//quitgame_Text.GetTextRef().setCharacterSize(textSize);
 
 	title_Text.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
-	//startgame_Text.GetTextRef().setFillColor(sf::Color::Green);
 	startgame_Text.SetIsSelected(true);
-	//quitgame_Text.GetTextRef().setFillColor(sf::Color::Red);
 	quitgame_Text.SetIsSelected(false);
 
 	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
@@ -71,13 +82,6 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 
 	return true;
 }
-
-//void Pong::CommonElementsHandler::UpdateBGSpriteScaleBasedOnRes()
-//{
-//	bgSprite.setScale(
-//		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
-//		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
-//}
 
 void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 {
@@ -102,13 +106,3 @@ sf::Text& Pong::CommonElementsHandler::GetMainTextRef()
 {
 	return title_Text.GetTextRef();
 }
-
-//sf::Text& Pong::CommonElementsHandler::GetStartGameTextRef()
-//{
-//	return startgame_Text.GetTextRef();
-//}
-//
-//sf::Text& Pong::CommonElementsHandler::GetQuitGameTextRef()
-//{
-//	return quitgame_Text.GetTextRef();
-//}
