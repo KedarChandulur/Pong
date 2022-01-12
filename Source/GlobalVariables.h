@@ -7,6 +7,7 @@ namespace Pong
 	extern const unsigned short SCREEN_WIDTH;
 	extern const unsigned short SCREEN_HEIGHT;
 
+	//Global bool for checking if the game is running or in not(in menu)
 	extern bool inGame;
 }
 
