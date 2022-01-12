@@ -169,12 +169,12 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 		if (ball_Ref.CheckForRight_BoundryCollision())
 		{
 			Pong::inGame = false;
-			commonElementsHandler.GetMainTextRef().setString("Player-1 wins!\nPress space to restart or\nescape to exit");
+			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-1 wins!\n");
 		}
 		else if (ball_Ref.CheckForLeft_BoundryCollision())
 		{
 			Pong::inGame = false;
-			commonElementsHandler.GetMainTextRef().setString("Player-2 wins!\nPress space to restart or\nescape to exit");
+			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-2 wins!\n");
 		}
 
 		if (rightPaddle_Ref.playAgainstAI)
