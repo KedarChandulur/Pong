@@ -18,16 +18,7 @@ void Pong::MainRenderWindow::QuitGame()
 
 bool Pong::MainRenderWindow::Initialize()
 {
-	if (!commonElementsHandler.Init(*mainRenderWindow))
-		return false;
-
-	//Paddle Initialization
-	leftPaddle_Ref.Init(true);
-	rightPaddle_Ref.Init(false);
-
-	//Ball Initialization
-	ball_Ref.Init();
-	return true;
+	return commonElementsHandler.Init(*mainRenderWindow);
 }
 
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
@@ -68,7 +59,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 					break;
 				}
 			}
-			else if (eventRef.key.code == sf::Keyboard::Space)
+			else if (eventRef.key.code == sf::Keyboard::Enter)
 			{
 				if (!Pong::inGame)
 				{
@@ -205,7 +196,6 @@ void Pong::MainRenderWindow::Render()
 {
 	//Clearing previous frame/window
 	mainRenderWindow->clear();
-	//Drawing background sprite(based on menu or ingame).
 
 	commonElementsHandler.Render(*mainRenderWindow);
 

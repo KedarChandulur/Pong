@@ -8,15 +8,14 @@ namespace Pong
 	class Ball : protected Pong::Common
 	{
 	public:
+		Ball() = default;
+		~Ball() = default;
 		void Init();
 		void SetRandomAngle();
 
 		void UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime);
 
 		void CheckForTopAndBottom_BoundryCollision(const float& deltaTime);
-
-		//void CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle);
-		//void CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle);
 
 		const bool& CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle);
 		const bool& CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle);

@@ -10,15 +10,12 @@ namespace Pong
 	class CommonElementsHandler
 	{
 	public:
-		//Returns true if initialization is successfull
+		//Returns true if initialization is successful
 		bool Init(sf::RenderWindow& mainRenderWindow);
-		//void UpdateBGSpriteScaleBasedOnRes();
 		void Render(sf::RenderWindow& mainRenderWindow);
 
 		sf::Sound& GetSoundObject();
 		sf::Text& GetMainTextRef();
-		//sf::Text& GetStartGameTextRef();
-		//sf::Text& GetQuitGameTextRef();
 
 		//Start Game Text Ref
 		TextHandler startgame_Text;

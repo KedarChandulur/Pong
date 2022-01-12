@@ -17,6 +17,8 @@ namespace Pong
 	class Paddle : protected Pong::Common
 	{
 	public:
+		Paddle() = default;
+		~Paddle() = default;
 		//void Init(const sf::Color& paddleColor, const float& paddleoffset);
 		void Init(bool isFirstPaddle);
 		void MoveUp(const float& deltaTime);
