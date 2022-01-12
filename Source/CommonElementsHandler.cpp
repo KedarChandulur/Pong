@@ -5,9 +5,11 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 {
 	if (!iconImage_Ref.loadFromFile("Resources/pong_icon.png"))
 		printf("%s", "Error loading the Icon Image.\n");
-
-	printf("%s", "Icon Image loaded.\n");
-	mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
+	else
+	{
+		printf("%s", "Icon Image loaded.\n");
+		mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
+	}
 
 	if (!fontRef.loadFromFile("Resources/Pacifico-Regular.ttf"))
 	{
