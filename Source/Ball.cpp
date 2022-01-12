@@ -3,10 +3,7 @@
 void Pong::Ball::Init()
 {
 	ballRadius = (float)(Pong::SCREEN_WIDTH / Pong::SCREEN_HEIGHT) * 10;
-	//ballRadius = 10;
 	
-	//this->mainBall.setRadius(ballRadius);
-
 	this->mainBall.setRadius(ballRadius - outLineThickness);
 	this->mainBall.setOutlineThickness(outLineThickness);
 	this->mainBall.setOutlineColor(sf::Color::Cyan);
