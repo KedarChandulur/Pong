@@ -10,6 +10,7 @@ namespace Pong
 	public:
 		Ball() = default;
 		~Ball() = default;
+
 		void Init();
 		void SetRandomAngle();
 
