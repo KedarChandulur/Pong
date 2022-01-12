@@ -10,6 +10,7 @@ namespace Pong
 	{
 	public:
 		Common() = default;
+		//Adding virtual destructor for safety(to avoid memory leaks)
 		virtual ~Common() = default;
 		virtual void Render(sf::RenderWindow& mainRenderWindow) const = 0;
 	protected:
