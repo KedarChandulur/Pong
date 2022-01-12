@@ -196,7 +196,6 @@ void Pong::MainRenderWindow::Render()
 {
 	//Clearing previous frame/window
 	mainRenderWindow->clear();
-	//Drawing background sprite(based on menu or ingame).
 
 	commonElementsHandler.Render(*mainRenderWindow);
 
