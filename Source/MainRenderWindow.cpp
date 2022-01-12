@@ -18,16 +18,7 @@ void Pong::MainRenderWindow::QuitGame()
 
 bool Pong::MainRenderWindow::Initialize()
 {
-	if (!commonElementsHandler.Init(*mainRenderWindow))
-		return false;
-
-	//Paddle Initialization
-	leftPaddle_Ref.Init(true);
-	rightPaddle_Ref.Init(false);
-
-	//Ball Initialization
-	ball_Ref.Init();
-	return true;
+	return commonElementsHandler.Init(*mainRenderWindow);
 }
 
 const bool Pong::MainRenderWindow::IsGameWindowOpen() const
