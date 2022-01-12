@@ -59,7 +59,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 					break;
 				}
 			}
-			else if (eventRef.key.code == sf::Keyboard::Space)
+			else if (eventRef.key.code == sf::Keyboard::Enter)
 			{
 				if (!Pong::inGame)
 				{
