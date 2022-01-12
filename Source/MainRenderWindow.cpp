@@ -69,16 +69,12 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 						Pong::inGame = true;
 						clock.restart();
 
-						//leftPaddle_Ref.Init(sf::Color::Green, 0.05f);
-						//rightPaddle_Ref.Init(sf::Color::Magenta, 0.951f);
 						leftPaddle_Ref.Init(true);
 						rightPaddle_Ref.Init(false);
 
 						ball_Ref.Init();
 						ball_Ref.SetRandomAngle();
 						commonElementsHandler.GetSoundObject().play();
-						/*auto playsound = commonElementsHandler.GetSoundObject();
-						playsound.play();*/
 					}
 					else if (commonElementsHandler.quitgame_Text.GetIsSelected())
 					{
