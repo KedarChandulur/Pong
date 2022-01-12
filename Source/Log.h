@@ -11,9 +11,9 @@ namespace Pong
 		//End line is already added inside the function.
 		static void Print(const char* stringToPrint);
 
-		//Log should not be cloneable.
+		//Guard: Preventing Log class to be cloneable.
 		Log(Log& other) = delete;
-		//Log should not be assignable.
+		//Guard: Preventing Log to be assignable.
 		void operator=(const Log&) = delete;
 	private:
 		Log() = default;
