@@ -19,7 +19,7 @@ namespace Pong
 	protected:
 		float speed = 225.0f;
 
-		static const unsigned short outLineThickness = 3;
+		static const uint16_t outLineThickness = 3;
 	};
 }
 #endif

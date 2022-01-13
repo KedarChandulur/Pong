@@ -16,8 +16,8 @@ void Pong::Ball::SetRandomAngle()
 {
 	//We are using "std::srand()" for creating randomness in initial mainBall angle/direction.
 	//Initialise srand() using the current time for preventing srand to return same random value in different application instance(s).
-	//Using static cast to cast from 'time_t' to 'unsigned int', preventing loss of data.
-	std::srand(static_cast<unsigned int>(std::time(NULL)));
+	//Using static cast to cast from 'time_t' to 'uint32_t(unsigned int)', preventing loss of data.
+	std::srand(static_cast<uint32_t>(std::time(NULL)));
 
 	float cosAngleValue = 0.0f;
 

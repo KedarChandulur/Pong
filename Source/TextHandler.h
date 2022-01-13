@@ -17,7 +17,7 @@ namespace Pong
 
 		const bool& GetIsSelected() const;
 
-		static const unsigned short textSize = 30;
+		static const uint16_t textSize = 30;
 	private:
 		sf::Text text_Ref;
 		bool isSelected = false;
