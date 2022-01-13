@@ -22,7 +22,7 @@ namespace Pong
 		void ValidateManualSpeed();
 		//Sets speed variable to default value
 		void ResetSpeed();
-		void UpdateAIPaddleSpeed(const short& updatedSpeed);
+		void UpdateAIPaddleSpeed(const short updatedSpeed);
 		void MoveAIPaddle(const float& deltaTime);
 
 		sf::Clock& GetAITimerRef() const;

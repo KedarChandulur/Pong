@@ -65,7 +65,7 @@ void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
 }
   
-void Pong::Paddle::UpdateAIPaddleSpeed(const short& updatedSpeed)
+void Pong::Paddle::UpdateAIPaddleSpeed(const short updatedSpeed)
 {	
 	speed = static_cast<float>((defaultSpeed / 2 - difficultyLevel) * updatedSpeed);
 }
