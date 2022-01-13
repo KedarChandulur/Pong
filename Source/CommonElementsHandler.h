@@ -15,7 +15,7 @@ namespace Pong
 	public:
 		//Returns true if initialization is successful
 		bool Init(sf::RenderWindow& mainRenderWindow);
-		void Play();
+		void PlayBallAudio();
 
 		sf::Text& GetMainTextRef();
 
@@ -23,7 +23,7 @@ namespace Pong
 
 		TextHandler startgame_Text;
 		TextHandler quitgame_Text;
-		//P v P or P v C(AI)
+		//P v P or P v C(Against AI)
 		TextHandler playmode;
 	private:
 		//Background Sprite

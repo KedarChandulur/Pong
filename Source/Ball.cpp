@@ -91,7 +91,7 @@ void Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle, Pon
 			ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 		mainBall.setPosition(leftPaddle.GetMainPaddleRef().getPosition().x + ballRadius + leftPaddle.GetPaddleSize().x / 2 + 0.1f, mainBall.getPosition().y);
-		commonElementsHandler.Play();
+		commonElementsHandler.PlayBallAudio();
 	}
 }
 
@@ -108,7 +108,7 @@ void Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle, P
 			ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 		mainBall.setPosition(rightPaddle.GetMainPaddleRef().getPosition().x - ballRadius - rightPaddle.GetPaddleSize().x / 2 - 0.1f, mainBall.getPosition().y);
-		commonElementsHandler.Play();
+		commonElementsHandler.PlayBallAudio();
 	}
 }
 

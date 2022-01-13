@@ -78,7 +78,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 						leftPaddle_Ref.Init(true);
 						rightPaddle_Ref.Init(false);
 						ball_Ref.Init();
-						commonElementsHandler.Play();
+						commonElementsHandler.PlayBallAudio();
 					}
 					else if (commonElementsHandler.quitgame_Text.GetIsSelected())
 					{
@@ -104,7 +104,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 						commonElementsHandler.playmode.GetTextRef().setString("P v C");
 						rightPaddle_Ref.ResetSpeed();
 					}
-					commonElementsHandler.Play();
+					commonElementsHandler.PlayBallAudio();
 				}
 			}
 
@@ -135,13 +135,13 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 				//Navigation controls in main menu or restart menu.
 				if (eventRef.key.code == sf::Keyboard::Up)
 				{
-					commonElementsHandler.Play();
+					commonElementsHandler.PlayBallAudio();
 					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
 					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
 				}
 				else if (eventRef.key.code == sf::Keyboard::Down)
 				{
-					commonElementsHandler.Play();
+					commonElementsHandler.PlayBallAudio();
 					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
 					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
 				}

@@ -106,7 +106,7 @@ sf::Text& Pong::CommonElementsHandler::GetMainTextRef()
 	return title_Text.GetTextRef();
 }
 
-void Pong::CommonElementsHandler::Play()
+void Pong::CommonElementsHandler::PlayBallAudio()
 {
 	if (ballBounceSound.getStatus() == sf::SoundSource::Status::Playing)
 		ballBounceSound.stop();
