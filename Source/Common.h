@@ -6,6 +6,9 @@
 
 namespace Pong
 {
+	/// <summary>
+	/// Common struct for Paddle and Ball variables
+	/// </summary>
 	struct Common
 	{
 	public:
