@@ -9,8 +9,9 @@ namespace Pong
 	struct Math
 	{
 	public:
-		static float Lerp(const float& a, const float& b, const float& t);
-		static float Naive_Lerp(const float& a, const float& b, const float& t);
+		static float Lerp(float a, float b, float t);
+		//Takes variables as const  references
+		static float Lerp_ThroughReference(const float& a, const float& b, const float& t);
 
 		Math(Math& other) = delete;
 		void operator=(const Math&) = delete;
