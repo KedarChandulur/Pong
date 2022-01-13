@@ -17,13 +17,15 @@ namespace Pong
 		void Init(bool isFirstPaddle);
 		void MoveUp(const float& deltaTime);
 		void MoveDown(const float& deltaTime);
-		void UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLevel& difficultyType);
+
 		//Used for reseting or re-initializing speed variable
 		void ValidateManualSpeed();
 		//Sets speed variable to default value
 		void ResetSpeed();
 		void UpdateAIPaddleSpeed(const short updatedSpeed);
 		void MoveAIPaddle(const float& deltaTime);
+
+		Pong::GlobalEnums::DifficultyLevel& GetDifficultyVariableRef();
 
 		sf::Clock& GetAITimerRef() const;
 

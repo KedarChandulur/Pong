@@ -51,13 +51,14 @@ void Pong::Paddle::MoveDown(const float& deltaTime)
 	}
 }
 
-void Pong::Paddle::UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLevel& difficultyLevel)
+Pong::GlobalEnums::DifficultyLevel& Pong::Paddle::GetDifficultyVariableRef()
 {
-	this->difficultyLevel = difficultyLevel;
+	return difficultyLevel;
 }
 
 void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
+	//Using this to get random position 
 	float RandomLerpValue = Pong::Math::Lerp(0.21f, 0.36f, (rand() % 10) * 0.1f);
 	float targetLerpValue = mainPaddle.getPosition().y + speed * deltaTime;
 	float updatedPositionWithLerp = Pong::Math::Lerp_ThroughReference(mainPaddle.getPosition().y, targetLerpValue, RandomLerpValue);
