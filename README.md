@@ -1,5 +1,5 @@
 # Pong
-Pong using Cpp and SFML
+**Pong using Cpp and SFML**
 
 **Game Instructions(Keybindings)**:
 - **Escape**: Use this keybinding to go from in game -> main menu and/or Quit the application from main menu.
