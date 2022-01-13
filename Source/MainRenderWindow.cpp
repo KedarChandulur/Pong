@@ -88,12 +88,22 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 			}
 			else if (eventRef.key.code == sf::Keyboard::C)
 			{
-				//Toggle the AI -> manual mode or vice versa.
-				rightPaddle_Ref.playAgainstAI = !rightPaddle_Ref.playAgainstAI;
-				if (!rightPaddle_Ref.playAgainstAI)
-					rightPaddle_Ref.ValidateManualSpeed();
-				else
-					rightPaddle_Ref.ResetSpeed();
+				//Toggling only works in main menu
+				if (!Pong::inGame)
+				{
+					//Toggle the AI -> manual mode or vice versa.
+					rightPaddle_Ref.playAgainstAI = !rightPaddle_Ref.playAgainstAI;
+					if (!rightPaddle_Ref.playAgainstAI)
+					{
+						commonElementsHandler.playmode.GetTextRef().setString("P v P");
+						rightPaddle_Ref.ValidateManualSpeed();
+					}
+					else
+					{
+						commonElementsHandler.playmode.GetTextRef().setString("P v C");
+						rightPaddle_Ref.ResetSpeed();
+					}
+				}
 			}
 
 

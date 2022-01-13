@@ -55,24 +55,30 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	title_Text.GetTextRef().setFont(fontRef);
 	startgame_Text.GetTextRef().setFont(fontRef);
 	quitgame_Text.GetTextRef().setFont(fontRef);
+	playmode.GetTextRef().setFont(fontRef);
 
 	title_Text.GetTextRef().setString("Hello, Welcome to Pong");
 	startgame_Text.GetTextRef().setString("Start");
 	quitgame_Text.GetTextRef().setString("Quit");
+	playmode.GetTextRef().setString("P v C");
 
 	title_Text.GetTextRef().setOrigin(title_Text.GetTextRef().getLocalBounds().width / 2, title_Text.GetTextRef().getLocalBounds().height / 2);
 	startgame_Text.GetTextRef().setOrigin(startgame_Text.GetTextRef().getLocalBounds().width / 2, startgame_Text.GetTextRef().getLocalBounds().height / 2);
 	quitgame_Text.GetTextRef().setOrigin(quitgame_Text.GetTextRef().getLocalBounds().width / 2, quitgame_Text.GetTextRef().getLocalBounds().height / 2);
+	playmode.GetTextRef().setOrigin(playmode.GetTextRef().getLocalBounds().width / 2, playmode.GetTextRef().getLocalBounds().height / 2);
 
 	title_Text.GetTextRef().setCharacterSize(Pong::TextHandler::textSize * 2);
+	playmode.GetTextRef().setCharacterSize(Pong::TextHandler::textSize + 15U);
 
 	title_Text.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
 	startgame_Text.SetIsSelected(true);
 	quitgame_Text.SetIsSelected(false);
+	playmode.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
 
 	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
 	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 50.0f);
 	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 50.0f));
+	playmode.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + Pong::TextHandler::textSize * 10);
 
 	ballBounceSound.setBuffer(ballSB);
 	ballBounceSound.setVolume(50.0f);
@@ -87,6 +93,7 @@ void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 		mainRenderWindow.draw(title_Text.GetTextRef());
 		mainRenderWindow.draw(startgame_Text.GetTextRef());
 		mainRenderWindow.draw(quitgame_Text.GetTextRef());
+		mainRenderWindow.draw(playmode.GetTextRef());
 	}
 	else
 	{
