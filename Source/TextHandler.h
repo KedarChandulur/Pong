@@ -11,7 +11,7 @@ namespace Pong
 	struct TextHandler
 	{
 	public:
-		void SetIsSelected(const bool& isSelected);
+		void SetIsSelected(bool isSelected);
 
 		sf::Text& GetTextRef();
 

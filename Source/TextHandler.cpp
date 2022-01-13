@@ -1,6 +1,6 @@
 #include "TextHandler.h"
 
-void Pong::TextHandler::SetIsSelected(const bool& isSelected)
+void Pong::TextHandler::SetIsSelected(bool isSelected)
 {
 	this->isSelected = isSelected;
 
