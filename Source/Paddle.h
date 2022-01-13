@@ -5,6 +5,9 @@
 
 namespace Pong
 {
+	/// <summary>
+	/// Creates and controls Paddle(s)
+	/// </summary>
 	class Paddle : protected Pong::Common
 	{
 	public:
