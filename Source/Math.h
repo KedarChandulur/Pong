@@ -4,17 +4,16 @@
 namespace Pong
 {
 	/// <summary>
-	/// Base Math struct. This struct is not allowed to be instantiated.
+	/// Base Math struct.
 	/// </summary>
 	struct Math
 	{
 	public:
-		static const float& Lerp(const float& a, const float& b, const float& t);
-		static const float& Naive_Lerp(const float& a, const float& b, const float& t);
+		static float Lerp(float a, float b, float t);
+		//Takes variables as const  references
+		static float Lerp_ThroughReference(const float& a, const float& b, const float& t);
 
-		//Guard: Preventing Math struct to be cloneable.
 		Math(Math& other) = delete;
-		//Guard: Preventing Math to be assignable.
 		void operator=(const Math&) = delete;
 	private:
 		Math() = default;

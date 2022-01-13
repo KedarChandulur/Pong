@@ -81,7 +81,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	playmode.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + Pong::TextHandler::textSize * 10);
 
 	ballBounceSound.setBuffer(ballSB);
-	ballBounceSound.setVolume(50.0f);
+	ballBounceSound.setVolume(30.0f);
 
 	return true;
 }
@@ -101,12 +101,14 @@ void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 	}
 }
 
-sf::Sound& Pong::CommonElementsHandler::GetSoundObject()
-{
-	return ballBounceSound;
-}
-
 sf::Text& Pong::CommonElementsHandler::GetMainTextRef()
 {
 	return title_Text.GetTextRef();
+}
+
+void Pong::CommonElementsHandler::PlayBallAudio()
+{
+	if (ballBounceSound.getStatus() == sf::SoundSource::Status::Playing)
+		ballBounceSound.stop();
+	ballBounceSound.play();
 }

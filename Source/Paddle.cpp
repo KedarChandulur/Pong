@@ -51,20 +51,22 @@ void Pong::Paddle::MoveDown(const float& deltaTime)
 	}
 }
 
-void Pong::Paddle::UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLevel& difficultyLevel)
+Pong::GlobalEnums::DifficultyLevel& Pong::Paddle::GetDifficultyVariableRef()
 {
-	this->difficultyLevel = difficultyLevel;
+	return difficultyLevel;
 }
 
-const void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
+void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
-	const float& RandomLerpValue = Pong::Math::Lerp(0.20f, 0.35f, (rand() % 10) * 0.1f);
-	const float& updatedPositionWithLerp = Pong::Math::Lerp(mainPaddle.getPosition().y, mainPaddle.getPosition().y + speed * deltaTime, RandomLerpValue);
+	//Using this to get random position 
+	float RandomLerpValue = Pong::Math::Lerp(0.21f, 0.36f, (rand() % 10) * 0.1f);
+	float targetLerpValue = mainPaddle.getPosition().y + speed * deltaTime;
+	float updatedPositionWithLerp = Pong::Math::Lerp_ThroughReference(mainPaddle.getPosition().y, targetLerpValue, RandomLerpValue);
 
 	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
 }
   
-const void Pong::Paddle::UpdateAIPaddleSpeed(const short& updatedSpeed)
+void Pong::Paddle::UpdateAIPaddleSpeed(const short updatedSpeed)
 {	
 	speed = static_cast<float>((defaultSpeed / 2 - difficultyLevel) * updatedSpeed);
 }
@@ -72,6 +74,11 @@ const void Pong::Paddle::UpdateAIPaddleSpeed(const short& updatedSpeed)
 void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow) const
 {
 	mainRenderWindow.draw(mainPaddle);
+}
+
+sf::Clock& Pong::Paddle::GetAITimerRef() const
+{
+	return AI_Timer;
 }
 
 const sf::RectangleShape& Pong::Paddle::GetMainPaddleRef() const
@@ -89,12 +96,7 @@ const float& Pong::Paddle::GetSpeed() const
 	return speed;
 }
 
-sf::Clock& Pong::Paddle::GetAITimerRef()
-{
-	return AI_Timer;
-}
-
-const sf::Time& Pong::Paddle::GetMaxHitTime()
+const sf::Time& Pong::Paddle::GetMaxHitTime() const
 {
 	return max_AI_hitTime;
 }

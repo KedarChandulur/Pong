@@ -11,11 +11,12 @@ namespace Pong
 	struct TextHandler
 	{
 	public:
-		void SetIsSelected(const bool& isSelected);
+		void SetIsSelected(bool isSelected);
 
 		sf::Text& GetTextRef();
 
 		const bool& GetIsSelected() const;
+
 		static const unsigned short textSize = 30;
 	private:
 		sf::Text text_Ref;
