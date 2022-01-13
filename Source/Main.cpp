@@ -16,10 +16,7 @@ int main()
 	}
 
 	//Main Game Loop.
-	while (mainWindow.IsGameWindowOpen())
-	{
-		mainWindow.RunMainGameLoop();
-	}
+	mainWindow.RunMainGameLoop();
 
 	//Program End.
 	return EXIT_SUCCESS;

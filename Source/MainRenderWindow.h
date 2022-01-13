@@ -1,7 +1,7 @@
 #ifndef MAINRENDERWINDOW_H
 #define MAINRENDERWINDOW_H
 
-#include "CommonElementsHandler.h"
+//#include "CommonElementsHandler.h"
 #include "Ball.h"
 
 namespace Pong
@@ -22,11 +22,9 @@ namespace Pong
 
 		//Main Game Loop
 		void RunMainGameLoop();
-
-		const bool IsGameWindowOpen() const;
 	private:
 		//Process input events
-		void ProcessEvents(const float& deltaTime);
+		void ProcessEvents(const float& deltaTime, sf::Clock& clock);
 		//Main Update Loop
 		void Update(const float& deltaTime);
 		//Main Render Loop
@@ -35,7 +33,6 @@ namespace Pong
 
 		//Main Render Window Reference
 		sf::RenderWindow* mainRenderWindow = nullptr;		
-		sf::Clock clock;
 
 		CommonElementsHandler commonElementsHandler;
 		Paddle leftPaddle_Ref;

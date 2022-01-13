@@ -15,10 +15,11 @@ namespace Pong
 	public:
 		//Returns true if initialization is successful
 		bool Init(sf::RenderWindow& mainRenderWindow);
-		void Render(sf::RenderWindow& mainRenderWindow);
+		void Play();
 
-		sf::Sound& GetSoundObject();
 		sf::Text& GetMainTextRef();
+
+		void Render(sf::RenderWindow& mainRenderWindow);
 
 		TextHandler startgame_Text;
 		TextHandler quitgame_Text;

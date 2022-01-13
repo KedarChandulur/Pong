@@ -21,20 +21,21 @@ bool Pong::MainRenderWindow::Initialize()
 	return commonElementsHandler.Init(*mainRenderWindow);
 }
 
-const bool Pong::MainRenderWindow::IsGameWindowOpen() const
-{
-	return mainRenderWindow->isOpen();
-}
-
 void Pong::MainRenderWindow::RunMainGameLoop()
 {
-	float deltaTime = clock.restart().asSeconds();
-	ProcessEvents(deltaTime);
-	Update(deltaTime);
-	Render();
+	sf::Clock clock = sf::Clock();
+	float deltaTime = 0.0f;
+	while (mainRenderWindow->isOpen())
+	{
+		//float deltaTime = clock.restart().asSeconds();
+		deltaTime = clock.restart().asSeconds();
+		ProcessEvents(deltaTime, clock);
+		Update(deltaTime);
+		Render();
+	}
 }
 
-void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
+void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& clock)
 {
 	sf::Event eventRef;
 
@@ -58,8 +59,8 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 				else
 				{
 					QuitGame();
-					break;
 				}
+				break;
 			}
 			else if (eventRef.key.code == sf::Keyboard::Enter)
 			{
@@ -70,20 +71,20 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 					if (commonElementsHandler.startgame_Text.GetIsSelected())
 					{
 						Pong::inGame = true;
+
 						clock.restart();
 
+						ball_Ref.SetRandomAngle();
 						leftPaddle_Ref.Init(true);
 						rightPaddle_Ref.Init(false);
-
 						ball_Ref.Init();
-						ball_Ref.SetRandomAngle();
-						commonElementsHandler.GetSoundObject().play();
+						commonElementsHandler.Play();
 					}
 					else if (commonElementsHandler.quitgame_Text.GetIsSelected())
 					{
 						QuitGame();
-						break;
 					}
+					break;
 				}
 			}
 			else if (eventRef.key.code == sf::Keyboard::C)
@@ -133,13 +134,13 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime)
 				//Navigation controls in main menu or restart menu.
 				if (eventRef.key.code == sf::Keyboard::Up)
 				{
-					commonElementsHandler.GetSoundObject().play();
+					commonElementsHandler.Play();
 					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
 					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
 				}
 				else if (eventRef.key.code == sf::Keyboard::Down)
 				{
-					commonElementsHandler.GetSoundObject().play();
+					commonElementsHandler.Play();
 					commonElementsHandler.startgame_Text.SetIsSelected(!commonElementsHandler.startgame_Text.GetIsSelected());
 					commonElementsHandler.quitgame_Text.SetIsSelected(!commonElementsHandler.quitgame_Text.GetIsSelected());
 				}
@@ -177,20 +178,6 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 {
 	if (Pong::inGame)
 	{
-		//Updating AI paddle movement based on AI mode(is on or off).
-		if (rightPaddle_Ref.playAgainstAI)
-			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
-
-		//Left and right paddle collision check
-		if (ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref))
-		{
-			commonElementsHandler.GetSoundObject().play();
-		}
-		else if (ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref))
-		{
-			commonElementsHandler.GetSoundObject().play();
-		}
-
 		//Left and right boundry collision check
 		if (ball_Ref.CheckForRight_BoundryCollision())
 		{
@@ -203,8 +190,16 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-2 wins!\n");
 		}
 
+		//Updating AI paddle movement based on AI mode(is on or off).
+		if (rightPaddle_Ref.playAgainstAI)
+			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
+
 		//Top and Bottom boundry collision check
 		ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
+
+		//Left and right paddle collision check
+		ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref,commonElementsHandler);
+		ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref, commonElementsHandler);
 	}
 }
 

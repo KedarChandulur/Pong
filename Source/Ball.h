@@ -2,6 +2,7 @@
 #define BALL_H
 
 #include "Paddle.h"
+#include "CommonElementsHandler.h"
 
 namespace Pong
 {
@@ -21,11 +22,11 @@ namespace Pong
 
 		void CheckForTopAndBottom_BoundryCollision(const float& deltaTime);
 
-		const bool& CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle);
-		const bool& CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle);
+		void CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle, Pong::CommonElementsHandler& commonElementsHandler);
+		void CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle, Pong::CommonElementsHandler& commonElementsHandler);
 
-		const bool& CheckForLeft_BoundryCollision() const;
-		const bool& CheckForRight_BoundryCollision() const;
+		bool CheckForLeft_BoundryCollision() const;
+		bool CheckForRight_BoundryCollision() const;
 
 		void Render(sf::RenderWindow& mainRenderWindow) const override;
 	private:

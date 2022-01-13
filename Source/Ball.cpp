@@ -51,7 +51,7 @@ void Pong::Ball::CheckForTopAndBottom_BoundryCollision(const float& deltaTime)
 	this->mainBall.move(std::cos(ballAngle) * speed * deltaTime, std::sin(ballAngle) * speed * deltaTime);
 }
 
-const bool& Pong::Ball::CheckForLeft_BoundryCollision() const
+bool Pong::Ball::CheckForLeft_BoundryCollision() const
 {
 	if (this->mainBall.getPosition().x - ballRadius < 20.0f)
 	{
@@ -62,7 +62,7 @@ const bool& Pong::Ball::CheckForLeft_BoundryCollision() const
 	return false;
 }
 
-const bool& Pong::Ball::CheckForRight_BoundryCollision() const
+bool Pong::Ball::CheckForRight_BoundryCollision() const
 {
 	if (this->mainBall.getPosition().x + ballRadius > Pong::SCREEN_WIDTH - 25.0f)
 	{
@@ -78,7 +78,7 @@ void Pong::Ball::Render(sf::RenderWindow& mainRenderWindow) const
 	mainRenderWindow.draw(mainBall);
 }
 
-const bool& Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle)
+void Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle, Pong::CommonElementsHandler& commonElementsHandler)
 {
 	if (mainBall.getPosition().x < leftPaddle.GetMainPaddleRef().getPosition().x + leftPaddle.GetPaddleSize().x / 2 &&
 		mainBall.getPosition().x - ballRadius > leftPaddle.GetMainPaddleRef().getPosition().x &&
@@ -91,13 +91,11 @@ const bool& Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPadd
 			ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 		mainBall.setPosition(leftPaddle.GetMainPaddleRef().getPosition().x + ballRadius + leftPaddle.GetPaddleSize().x / 2 + 0.1f, mainBall.getPosition().y);
-		return true;
+		commonElementsHandler.Play();
 	}
-
-	return false;
 }
 
-const bool& Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle)
+void Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle, Pong::CommonElementsHandler& commonElementsHandler)
 {
 	if (mainBall.getPosition().x + ballRadius > rightPaddle.GetMainPaddleRef().getPosition().x - rightPaddle.GetPaddleSize().x / 2 &&
 		mainBall.getPosition().x + ballRadius < rightPaddle.GetMainPaddleRef().getPosition().x &&
@@ -110,10 +108,8 @@ const bool& Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPa
 			ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
 		mainBall.setPosition(rightPaddle.GetMainPaddleRef().getPosition().x - ballRadius - rightPaddle.GetPaddleSize().x / 2 - 0.1f, mainBall.getPosition().y);
-		return true;
+		commonElementsHandler.Play();
 	}
-
-	return false;
 }
 
 void Pong::Ball::UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime)

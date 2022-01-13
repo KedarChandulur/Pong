@@ -101,12 +101,14 @@ void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 	}
 }
 
-sf::Sound& Pong::CommonElementsHandler::GetSoundObject()
-{
-	return ballBounceSound;
-}
-
 sf::Text& Pong::CommonElementsHandler::GetMainTextRef()
 {
 	return title_Text.GetTextRef();
+}
+
+void Pong::CommonElementsHandler::Play()
+{
+	if (ballBounceSound.getStatus() == sf::SoundSource::Status::Playing)
+		ballBounceSound.stop();
+	ballBounceSound.play();
 }
