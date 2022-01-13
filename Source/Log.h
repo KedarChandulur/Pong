@@ -5,13 +5,16 @@
 
 namespace Pong
 {
-	class Log
+	/// <summary>
+	/// Base Log struct. This struct is not allowed to be instantiated.
+	/// </summary>
+	struct Log
 	{
 	public:
 		//End line is already added inside the function.
 		static void Print(const char* stringToPrint);
 
-		//Guard: Preventing Log class to be cloneable.
+		//Guard: Preventing Log struct to be cloneable.
 		Log(Log& other) = delete;
 		//Guard: Preventing Log to be assignable.
 		void operator=(const Log&) = delete;
