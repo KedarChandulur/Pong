@@ -1,7 +1,5 @@
 #include "Paddle.h"
-
-#include <iostream>
-#include <cmath>
+#include "Math.h"
 
 void Pong::Paddle::Init(bool isFirstPaddle)
 {
@@ -15,25 +13,15 @@ void Pong::Paddle::Init(bool isFirstPaddle)
 	else
 		mainPaddle.setOutlineColor(sf::Color::Magenta);
 
-	//if (isFirstPaddle)
-	//	mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.05f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
-	//else
-	//	mainPaddle.setPosition(Pong::SCREEN_WIDTH * 0.951f, Pong::SCREEN_HEIGHT / 2.f - (paddleSize.x * 2));
-
 	if (isFirstPaddle)
 		mainPaddle.setPosition(56.0f, Pong::SCREEN_HEIGHT / 2.0f - 50.0f);
 	else
 		mainPaddle.setPosition(Pong::SCREEN_WIDTH - 51.5f, Pong::SCREEN_HEIGHT / 2.0f - 50.0f);
 
-	if (isFirstPaddle)
+	if (isFirstPaddle || !playAgainstAI)
 		ValidateManualSpeed();
 	else
 		ResetSpeed();
-
-	/*if (isFirstPaddle || !playAgainstAI)
-		ValidateManualSpeed();
-	else if (playAgainstAI)
-		ResetSpeed();*/
 }
 
 void Pong::Paddle::ResetSpeed()
@@ -70,8 +58,8 @@ void Pong::Paddle::UpdateAIPaddleSpeedEnum(const Pong::GlobalEnums::DifficultyLe
 
 const void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
-	const float& RandomLerpValue = Lerp(0.15f, 0.35f, rand() % 10 * 0.1f);
-	const float& updatedPositionWithLerp = Lerp(mainPaddle.getPosition().y, mainPaddle.getPosition().y + speed * deltaTime, RandomLerpValue);
+	const float& RandomLerpValue = Pong::Math::Lerp(0.20f, 0.35f, (rand() % 10) * 0.1f);
+	const float& updatedPositionWithLerp = Pong::Math::Lerp(mainPaddle.getPosition().y, mainPaddle.getPosition().y + speed * deltaTime, RandomLerpValue);
 
 	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
 }
@@ -84,11 +72,6 @@ const void Pong::Paddle::UpdateAIPaddleSpeed(const short& updatedSpeed)
 void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow) const
 {
 	mainRenderWindow.draw(mainPaddle);
-}
-
-float Pong::Paddle::Lerp(const float& a, const float& b, const float& t)
-{
-	return (a * (1.0f - t)) + (b * t);
 }
 
 const sf::RectangleShape& Pong::Paddle::GetMainPaddleRef() const
