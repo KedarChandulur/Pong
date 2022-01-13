@@ -167,6 +167,20 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 {
 	if (Pong::inGame)
 	{
+		//Updating AI paddle movement based on AI mode(is on or off).
+		if (rightPaddle_Ref.playAgainstAI)
+			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
+
+		//Left and right paddle collision check
+		if (ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref))
+		{
+			commonElementsHandler.GetSoundObject().play();
+		}
+		else if (ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref))
+		{
+			commonElementsHandler.GetSoundObject().play();
+		}
+
 		//Left and right boundry collision check
 		if (ball_Ref.CheckForRight_BoundryCollision())
 		{
@@ -179,22 +193,8 @@ void Pong::MainRenderWindow::Update(const float& deltaTime)
 			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-2 wins!\n");
 		}
 
-		//Updating AI paddle movement based on AI mode(is on or off).
-		if (rightPaddle_Ref.playAgainstAI)
-			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
-
 		//Top and Bottom boundry collision check
 		ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
-
-		//Left and right paddle collision check
-		if (ball_Ref.CheckForLeftPaddleCollision(leftPaddle_Ref))
-		{
-			commonElementsHandler.GetSoundObject().play();
-		}
-		else if (ball_Ref.CheckForRightPaddleCollision(rightPaddle_Ref))
-		{
-			commonElementsHandler.GetSoundObject().play();
-		}
 	}
 }
 
