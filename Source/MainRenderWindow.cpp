@@ -104,6 +104,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 						commonElementsHandler.playmode.GetTextRef().setString("P v C");
 						rightPaddle_Ref.ResetSpeed();
 					}
+					commonElementsHandler.Play();
 				}
 			}
 
