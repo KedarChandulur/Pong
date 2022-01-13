@@ -22,13 +22,12 @@ namespace Pong
 		void ValidateManualSpeed();
 		//Sets speed variable to default value
 		void ResetSpeed();
+		void UpdateAIPaddleSpeed(const short& updatedSpeed);
+		void MoveAIPaddle(const float& deltaTime);
 
-		sf::Clock& GetAITimerRef();
-		const sf::Time& GetMaxHitTime();
+		sf::Clock& GetAITimerRef() const;
 
-		const void UpdateAIPaddleSpeed(const short& updatedSpeed);
-		const void MoveAIPaddle(const float& deltaTime);
-
+		const sf::Time& GetMaxHitTime() const;
 		const sf::RectangleShape& GetMainPaddleRef() const;
 		const sf::Vector2f& GetPaddleSize() const;
 		const float& GetSpeed() const;

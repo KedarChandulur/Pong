@@ -16,6 +16,7 @@ namespace Pong
 		sf::Text& GetTextRef();
 
 		const bool& GetIsSelected() const;
+
 		static const unsigned short textSize = 30;
 	private:
 		sf::Text text_Ref;
