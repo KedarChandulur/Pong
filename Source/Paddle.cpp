@@ -60,7 +60,7 @@ void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
 	float RandomLerpValue = Pong::Math::Lerp(0.21f, 0.36f, (rand() % 10) * 0.1f);
 	float targetLerpValue = mainPaddle.getPosition().y + speed * deltaTime;
-	float updatedPositionWithLerp = Pong::Math::Lerp(mainPaddle.getPosition().y, targetLerpValue, RandomLerpValue);
+	float updatedPositionWithLerp = Pong::Math::Lerp_ThroughReference(mainPaddle.getPosition().y, targetLerpValue, RandomLerpValue);
 
 	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
 }
