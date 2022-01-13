@@ -22,6 +22,8 @@ namespace Pong
 
 		TextHandler startgame_Text;
 		TextHandler quitgame_Text;
+		//P v P or P v C(AI)
+		TextHandler playmode;
 	private:
 		//Background Sprite
 		sf::Sprite bgSprite;
