@@ -1,7 +1,6 @@
 #ifndef MAINRENDERWINDOW_H
 #define MAINRENDERWINDOW_H
 
-//#include "CommonElementsHandler.h"
 #include "Ball.h"
 
 namespace Pong
