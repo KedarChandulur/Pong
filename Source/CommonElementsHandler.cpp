@@ -1,45 +1,42 @@
 #include "CommonElementsHandler.h"
-#include "GlobalVariables.h"
+#include "Log.h"
 
-//Returning false only for font loading because with all other elements not loaded the game will be still played
+//Returning false only for font loading because with all other elements not loaded the game is still playable with some elements/effects missing.
 //But without font, game's menu text itself is not visible - so returning false only on font failure.
 bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 {
 	if (!fontRef.loadFromFile("Resources/Pacifico-Regular.ttf"))
 	{
-		printf("%s", "Error loading the Font.\n");
+		Pong::Log::Print("Error loading the Font.");
 		return false;
 	}
 	else
 	{
-		printf("%s", "Font loaded.\n");
+		Pong::Log::Print("Font loaded.");
 	}
 
 	if (!iconImage_Ref.loadFromFile("Resources/pong_icon.png"))
 	{
-		printf("%s", "Error loading the Icon Image.\n");
-		//return false;
+		Pong::Log::Print("Error loading the Icon Image.");
 	}
 	else
 	{
-		printf("%s", "Icon Image loaded.\n");
+		Pong::Log::Print("Icon Image loaded.");
 		mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
 	}
 	
 	if (!ballSB.loadFromFile("Resources/mixkit-game-ball-tap-2073.wav"))
 	{
-		printf("%s", "Error loading the Audio clip.\n");
-		//return false;
+		Pong::Log::Print("Error loading the Audio clip.");
 	}
 	else
 	{
-		printf("%s", "Audio clip loaded.\n");
+		Pong::Log::Print("Audio clip loaded.");
 	}
 
 	if (!bgTexture.loadFromFile("Resources/Pong_BG.png"))
 	{
-		printf("%s", "Error loading the background texture.\n");
-		//return false;
+		Pong::Log::Print("Error loading the background texture.");
 
 		sf::Image tempImage = sf::Image();
 		tempImage.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT, sf::Color::Blue);		
@@ -47,7 +44,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	}
 	else
 	{
-		printf("%s", "Background texture loaded successfully.\n");
+		Pong::Log::Print("Background texture loaded successfully.");
 	}
 
 	bgSprite.setTexture(bgTexture);

@@ -17,33 +17,27 @@ namespace Pong
 
 		//Initializes required resources
 		//Returns true if Initialization was successfull.
+		//On false(failure) app will be terminated.
 		bool Initialize();
 
 		//Main Game Loop
 		void RunMainGameLoop();
 
-		//Checks if Game Window is open
 		const bool IsGameWindowOpen() const;
 	private:
-		//Process basic input events
+		//Process input events
 		void ProcessEvents(const float& deltaTime);
 		//Main Update Loop
 		void Update(const float& deltaTime);
-		//Main Renderer Loop
+		//Main Render Loop
 		void Render();
-		//Closes the Main Game Window
 		void QuitGame();
 
-		//Render Window Variable Reference
-		sf::RenderWindow* mainRenderWindow = nullptr;
-		
-		//Clock Reference
+		//Main Render Window Reference
+		sf::RenderWindow* mainRenderWindow = nullptr;		
 		sf::Clock clock;
 
-		//CommonElementsHandler Reference
 		CommonElementsHandler commonElementsHandler;
-
-		//In Game Elements
 		Paddle leftPaddle_Ref;
 		Paddle rightPaddle_Ref;
 		Ball ball_Ref;

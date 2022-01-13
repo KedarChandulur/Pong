@@ -5,11 +5,15 @@
 
 namespace Pong
 {
+	/// <summary>
+	/// Creates and controls Main Ball
+	/// </summary>
 	class Ball : protected Pong::Common
 	{
 	public:
 		Ball() = default;
 		~Ball() = default;
+
 		void Init();
 		void SetRandomAngle();
 

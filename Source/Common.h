@@ -6,10 +6,14 @@
 
 namespace Pong
 {
+	/// <summary>
+	/// Common struct for Paddle and Ball variables
+	/// </summary>
 	struct Common
 	{
 	public:
 		Common() = default;
+		//Adding virtual destructor for safety(to avoid memory leaks)
 		virtual ~Common() = default;
 		virtual void Render(sf::RenderWindow& mainRenderWindow) const = 0;
 	protected:

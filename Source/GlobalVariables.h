@@ -7,20 +7,24 @@ namespace Pong
 	extern const unsigned short SCREEN_WIDTH;
 	extern const unsigned short SCREEN_HEIGHT;
 
+	//Global bool for checking if the game is running or in not(in menu)
 	extern bool inGame;
 }
 
 namespace Pong
 {
+	/// <summary>
+	/// Common namespace for Global enum
+	/// </summary>
 	namespace GlobalEnums
 	{
-		//Each level/difficulty updates the paddle's speed by removing the level(enum value) amount
+		//Each level/difficulty updates the paddle's speed by removing the enum value amount
 		enum DifficultyLevel : unsigned short
 		{
-			VeryHigh = 50,
+			VeryHigh = 45,
 			High = 100,
-			Medium = 150,
-			Low = 200,
+			Medium = 155,
+			Low = 210,
 		};
 	}
 }
