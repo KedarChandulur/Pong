@@ -5,6 +5,9 @@
 
 namespace Pong
 {
+	/// <summary>
+	/// Base Text Handler struct.
+	/// </summary>
 	struct TextHandler
 	{
 	public:
