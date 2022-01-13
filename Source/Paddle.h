@@ -22,7 +22,7 @@ namespace Pong
 		void ValidateManualSpeed();
 		//Sets speed variable to default value
 		void ResetSpeed();
-		void UpdateAIPaddleSpeed(const short updatedSpeed);
+		void UpdateAIPaddleSpeed(const int16_t updatedSpeed);
 		void MoveAIPaddle(const float& deltaTime);
 
 		Pong::GlobalEnums::DifficultyLevel& GetDifficultyVariableRef();
@@ -46,7 +46,7 @@ namespace Pong
 		static sf::Clock AI_Timer;
 		static sf::Time max_AI_hitTime;
 
-		static const unsigned short defaultSpeed = 1000U;
+		static const uint16_t defaultSpeed = 1000U;
 	};
 }
 #endif
