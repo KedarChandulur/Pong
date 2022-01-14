@@ -1,5 +1,19 @@
-# Pong
-**Pong using Cpp and SFML**
+# Pong using Cpp and SFML
+**Tools used**: Visual Studio Community 2019, SFML Library.
+
+## Steps to followed to run the game locally.
+### SFML Setup:
+**SFML tutorials main link**:
+https://www.sfml-dev.org/tutorials/2.5/
+
+**Use this link to setup SFML in visual studio**:
+https://www.sfml-dev.org/tutorials/2.5/start-vc.php
+
+### After the SFML setup:
+After SFML setup is successful, Build the project based on the IDE you are using.
+
+## Game Files can be found here:
+https://drive.google.com/drive/folders/1ZCkskUGtOwU5iOyZXaubolIBeso4dU0h?usp=sharing
 
 **Game Instructions(Keybindings)**:
 - **Escape**: Use this keybinding to go from in game -> main menu and/or Quit the application from main menu.
