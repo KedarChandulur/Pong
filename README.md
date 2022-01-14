@@ -2,14 +2,15 @@
 **Tools used**: Visual Studio Community 2019, SFML Library.
 
 ## Steps to followed to run the game locally.
-### SFML Setup:
+### Dependencies:
+#### SFML Setup:
 **SFML tutorials main link**:
 https://www.sfml-dev.org/tutorials/2.5/
 
 **Use this link to setup SFML in visual studio**:
 https://www.sfml-dev.org/tutorials/2.5/start-vc.php
 
-### After the SFML setup:
+### After the Depenencies setup:
 After SFML setup is successful, Build the project based on the IDE you are using.
 
 ## Game Files can be found here:
