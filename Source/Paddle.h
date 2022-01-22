@@ -34,7 +34,7 @@ namespace Pong
 		const sf::Vector2f& GetPaddleSize() const;
 		const float& GetSpeed() const;
 		
-		void Render(sf::RenderWindow& mainRenderWindow) const override;
+		void Render(sf::RenderWindow& mainRenderWindow) override;
 
 		static bool playAgainstAI;
 	private:

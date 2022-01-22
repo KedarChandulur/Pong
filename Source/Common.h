@@ -15,7 +15,7 @@ namespace Pong
 		Common() = default;
 		//Adding virtual destructor for safety(to avoid memory leaks)
 		virtual ~Common() = default;
-		virtual void Render(sf::RenderWindow& mainRenderWindow) const = 0;
+		virtual void Render(sf::RenderWindow& mainRenderWindow) = 0;
 	protected:
 		float speed = 225.0f;
 

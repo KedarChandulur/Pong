@@ -71,7 +71,7 @@ void Pong::Paddle::UpdateAIPaddleSpeed(const int16_t updatedSpeed)
 	speed = static_cast<float>((defaultSpeed / 2 - difficultyLevel) * updatedSpeed);
 }
 
-void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow) const
+void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow)
 {
 	mainRenderWindow.draw(mainPaddle);
 }
