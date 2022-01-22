@@ -28,7 +28,7 @@ namespace Pong
 		bool CheckForLeft_BoundryCollision() const;
 		bool CheckForRight_BoundryCollision() const;
 
-		void Render(sf::RenderWindow& mainRenderWindow) const override;
+		void Render(sf::RenderWindow& mainRenderWindow) override;
 	private:
 		sf::CircleShape mainBall;
 

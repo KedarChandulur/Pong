@@ -73,7 +73,7 @@ bool Pong::Ball::CheckForRight_BoundryCollision() const
 	return false;
 }
 
-void Pong::Ball::Render(sf::RenderWindow& mainRenderWindow) const
+void Pong::Ball::Render(sf::RenderWindow& mainRenderWindow)
 {
 	mainRenderWindow.draw(mainBall);
 }
