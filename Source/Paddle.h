@@ -25,7 +25,7 @@ namespace Pong
 		void UpdateAIPaddleSpeed(const int16_t updatedSpeed);
 		void MoveAIPaddle(const float& deltaTime);
 
-		Pong::GlobalEnums::DifficultyLevel& GetDifficultyVariableRef();
+		void SetAIDifficulty(const Pong::GlobalEnums::DifficultyLevel& difficultyLevel);
 
 		sf::Clock& GetAITimerRef() const;
 

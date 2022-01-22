@@ -51,9 +51,9 @@ void Pong::Paddle::MoveDown(const float& deltaTime)
 	}
 }
 
-Pong::GlobalEnums::DifficultyLevel& Pong::Paddle::GetDifficultyVariableRef()
+void Pong::Paddle::SetAIDifficulty(const Pong::GlobalEnums::DifficultyLevel& difficultyLevel)
 {
-	return difficultyLevel;
+	this->difficultyLevel = difficultyLevel;
 }
 
 void Pong::Paddle::MoveAIPaddle(const float& deltaTime)

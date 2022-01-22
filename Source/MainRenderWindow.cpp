@@ -114,19 +114,19 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 				//Set AI difficulty
 				if (eventRef.key.code == sf::Keyboard::Num1 || eventRef.key.code == sf::Keyboard::Numpad1)
 				{
-					rightPaddle_Ref.GetDifficultyVariableRef() = Pong::GlobalEnums::DifficultyLevel::Low;
+					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::Low);
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num2 || eventRef.key.code == sf::Keyboard::Numpad2)
 				{
-					rightPaddle_Ref.GetDifficultyVariableRef() = Pong::GlobalEnums::DifficultyLevel::Medium;
+					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::Medium);
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num3 || eventRef.key.code == sf::Keyboard::Numpad3)
 				{
-					rightPaddle_Ref.GetDifficultyVariableRef() = Pong::GlobalEnums::DifficultyLevel::High;
+					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::High);
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num4 || eventRef.key.code == sf::Keyboard::Numpad4)
 				{
-					rightPaddle_Ref.GetDifficultyVariableRef() = Pong::GlobalEnums::DifficultyLevel::VeryHigh;
+					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::VeryHigh);
 				}
 			}
 
