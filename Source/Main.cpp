@@ -1,4 +1,4 @@
-#include "MainRenderWindow.h"
+#include "Application.h"
 
 int main()
 {
@@ -6,17 +6,17 @@ int main()
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	_CrtSetBreakAlloc(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	//Main game window instance.
-	Pong::MainRenderWindow mainWindow;
+	//Main game window(application) instance.
+	Pong::Application application;
 
 	//If text font resource is not present in resources the game won't run and quits.
-	if (!mainWindow.Initialize())
+	if (!application.Initialize())
 	{
 		return EXIT_FAILURE;
 	}
 
 	//Main Game Loop.
-	mainWindow.RunMainGameLoop();
+	application.RunMainGameLoop();
 
 	//Program End.
 	return EXIT_SUCCESS;

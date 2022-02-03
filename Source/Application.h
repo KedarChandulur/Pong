@@ -1,18 +1,18 @@
-#ifndef MAINRENDERWINDOW_H
-#define MAINRENDERWINDOW_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 #include "Ball.h"
 
 namespace Pong
 {
-	/// <summary>
-	/// Creates and controls Main Window
-	/// </summary>
-	class MainRenderWindow
+	class Application
 	{
+		/// <summary>
+		/// Creates and controls Main Window(Application)
+		/// </summary>
 	public:
-		MainRenderWindow();
-		~MainRenderWindow();
+		Application();
+		~Application();
 
 		//Initializes required resources
 		//Returns true if Initialization was successfull.
@@ -22,6 +22,7 @@ namespace Pong
 		//Main Game Loop
 		void RunMainGameLoop();
 	private:
+		void CleanUp();
 		//Process input events
 		void ProcessEvents(const float& deltaTime, sf::Clock& clock);
 		//Main Update Loop
@@ -31,7 +32,7 @@ namespace Pong
 		void QuitGame();
 
 		//Main Render Window Reference
-		sf::RenderWindow* mainRenderWindow = nullptr;		
+		sf::RenderWindow* mainRenderWindow = nullptr;
 
 		CommonElementsHandler commonElementsHandler;
 		Paddle leftPaddle_Ref;
