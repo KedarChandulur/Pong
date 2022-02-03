@@ -22,17 +22,13 @@ namespace Pong
 		void MoveDown(const float& deltaTime);
 
 		//Used for reseting or re-initializing speed variable
-		void ValidateManualSpeed();
+		void ReValidateManualSpeed();
 		//Sets speed variable to default value
 		void ResetSpeed();
 
 		void UpdateAIPaddleMovement(Pong::Ball& ball, const float& deltaTime);
 
-		void UpdateAIPaddleSpeed(const int16_t updatedSpeed);
-
 		void SetAIDifficulty(const uint16_t& difficultyLevel);
-
-		sf::Clock& GetAITimerRef() const;
 
 		const sf::RectangleShape& GetMainPaddleRef() const;
 		const sf::Vector2f& GetPaddleSize() const;
@@ -41,6 +37,7 @@ namespace Pong
 
 		static bool playAgainstAI;
 	private:
+		void UpdateAIPaddleSpeed(const int16_t updatedSpeed);
 		void MoveAIPaddle(const float& deltaTime);
 
 		sf::RectangleShape mainPaddle;

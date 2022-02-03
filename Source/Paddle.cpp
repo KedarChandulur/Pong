@@ -19,7 +19,7 @@ void Pong::Paddle::Init(bool isFirstPaddle)
 		mainPaddle.setPosition(Pong::GlobalVariables::SCREEN_WIDTH - 51.5f, Pong::GlobalVariables::SCREEN_HEIGHT / 2.0f - 50.0f);
 
 	if (isFirstPaddle || !playAgainstAI)
-		ValidateManualSpeed();
+		ReValidateManualSpeed();
 	else
 		ResetSpeed();
 }
@@ -29,7 +29,7 @@ void Pong::Paddle::ResetSpeed()
 	speed = defaultSpeed;
 }
 
-void Pong::Paddle::ValidateManualSpeed()
+void Pong::Paddle::ReValidateManualSpeed()
 {
 	ResetSpeed();
 	speed += static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::Low);
@@ -94,11 +94,6 @@ void Pong::Paddle::UpdateAIPaddleSpeed(const int16_t updatedSpeed)
 void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow)
 {
 	mainRenderWindow.draw(mainPaddle);
-}
-
-sf::Clock& Pong::Paddle::GetAITimerRef() const
-{
-	return AI_Timer;
 }
 
 const sf::RectangleShape& Pong::Paddle::GetMainPaddleRef() const
