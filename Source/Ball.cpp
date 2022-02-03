@@ -121,23 +121,3 @@ void Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle, P
 		commonElementsHandler.PlayBallAudio();
 	}
 }
-
-//void Pong::Ball::UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime)
-//{
-//	if (((rightPaddle.GetSpeed() < 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2 > 5.f)) ||
-//		((rightPaddle.GetSpeed() > 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2 < Pong::GlobalVariables::SCREEN_HEIGHT - 5.f)))
-//	{
-//		rightPaddle.MoveAIPaddle(deltaTime);
-//	}
-//
-//	if (rightPaddle.GetAITimerRef().getElapsedTime() > rightPaddle.GetMaxHitTime())
-//	{
-//		rightPaddle.GetAITimerRef().restart();
-//		if (mainBall.getPosition().y + ballRadius > rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2)
-//			rightPaddle.UpdateAIPaddleSpeed(1);
-//		else if (mainBall.getPosition().y - ballRadius < rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2)
-//			rightPaddle.UpdateAIPaddleSpeed(-1);
-//		else
-//			rightPaddle.UpdateAIPaddleSpeed(0);
-//	}
-//}

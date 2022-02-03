@@ -20,8 +20,6 @@ namespace Pong
 		void Init();
 		void SetRandomAngle();
 
-		//void UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime);
-
 		void CheckForTopAndBottom_BoundryCollision(const float& deltaTime);
 
 		void CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle, Pong::CommonElementsHandler& commonElementsHandler);
