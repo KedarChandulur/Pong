@@ -22,6 +22,7 @@ namespace Pong
 		//Main Game Loop
 		void RunMainGameLoop();
 	private:
+		void CleanUp();
 		//Process input events
 		void ProcessEvents(const float& deltaTime, sf::Clock& clock);
 		//Main Update Loop

@@ -8,7 +8,7 @@ Pong::Application::Application()
 
 Pong::Application::~Application()
 {
-	delete mainRenderWindow;
+	CleanUp();
 }
 
 void Pong::Application::QuitGame()
@@ -19,6 +19,11 @@ void Pong::Application::QuitGame()
 bool Pong::Application::Initialize()
 {
 	return commonElementsHandler.Init(*mainRenderWindow);
+}
+
+void Pong::Application::CleanUp()
+{
+	delete mainRenderWindow;
 }
 
 void Pong::Application::RunMainGameLoop()
