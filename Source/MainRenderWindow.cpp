@@ -2,7 +2,7 @@
 
 Pong::MainRenderWindow::MainRenderWindow()
 {
-	mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT, 32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
+	mainRenderWindow = new sf::RenderWindow(sf::VideoMode(Pong::GlobalVariables::SCREEN_WIDTH, Pong::GlobalVariables::SCREEN_HEIGHT, 32U), "Pong Game", sf::Style::Titlebar | sf::Style::Close);
 	mainRenderWindow->setVerticalSyncEnabled(true);
 }
 
@@ -49,10 +49,10 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 		case sf::Event::EventType::KeyPressed:
 			if (eventRef.key.code == sf::Keyboard::Escape)
 			{
-				if (inGame)
+				if (Pong::GlobalVariables::inGame)
 				{
 					//Go to main menu.
-					inGame = false;
+					Pong::GlobalVariables::inGame = false;
 					commonElementsHandler.GetMainTextRef().setString("Hello, Welcome to Pong");
 					commonElementsHandler.startgame_Text.GetTextRef().setString("Start");
 				}
@@ -64,13 +64,13 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 			}
 			else if (eventRef.key.code == sf::Keyboard::Enter)
 			{
-				if (!Pong::inGame)
+				if (!Pong::GlobalVariables::inGame)
 				{
 					//Start or Restart a game.
 					commonElementsHandler.startgame_Text.GetTextRef().setString("Restart");
 					if (commonElementsHandler.startgame_Text.GetIsSelected())
 					{
-						Pong::inGame = true;
+						Pong::GlobalVariables::inGame = true;
 
 						clock.restart();
 
@@ -90,7 +90,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 			else if (eventRef.key.code == sf::Keyboard::C)
 			{
 				//Toggling only works in main menu
-				if (!Pong::inGame)
+				if (!Pong::GlobalVariables::inGame)
 				{
 					//Toggle the AI -> manual mode or vice versa.
 					rightPaddle_Ref.playAgainstAI = !rightPaddle_Ref.playAgainstAI;
@@ -114,23 +114,23 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 				//Set AI difficulty
 				if (eventRef.key.code == sf::Keyboard::Num1 || eventRef.key.code == sf::Keyboard::Numpad1)
 				{
-					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::Low);
+					rightPaddle_Ref.SetAIDifficulty(static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::Low));
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num2 || eventRef.key.code == sf::Keyboard::Numpad2)
 				{
-					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::Medium);
+					rightPaddle_Ref.SetAIDifficulty(static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::Medium));
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num3 || eventRef.key.code == sf::Keyboard::Numpad3)
 				{
-					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::High);
+					rightPaddle_Ref.SetAIDifficulty(static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::High));
 				}
 				else if (eventRef.key.code == sf::Keyboard::Num4 || eventRef.key.code == sf::Keyboard::Numpad4)
 				{
-					rightPaddle_Ref.SetAIDifficulty(Pong::GlobalEnums::DifficultyLevel::VeryHigh);
+					rightPaddle_Ref.SetAIDifficulty(static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::VeryHigh));
 				}
 			}
 
-			if (!inGame)
+			if (!Pong::GlobalVariables::inGame)
 			{
 				//Navigation controls in main menu or restart menu.
 				if (eventRef.key.code == sf::Keyboard::Up)
@@ -177,23 +177,23 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 
 void Pong::MainRenderWindow::Update(const float& deltaTime)
 {
-	if (Pong::inGame)
+	if (Pong::GlobalVariables::inGame)
 	{
 		//Left and right boundry collision check
 		if (ball_Ref.CheckForRight_BoundryCollision())
 		{
-			Pong::inGame = false;
+			Pong::GlobalVariables::inGame = false;
 			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-1 wins!\n");
 		}
 		else if (ball_Ref.CheckForLeft_BoundryCollision())
 		{
-			Pong::inGame = false;
+			Pong::GlobalVariables::inGame = false;
 			commonElementsHandler.GetMainTextRef().setString("\n\t\tPlayer-2 wins!\n");
 		}
 
 		//Updating AI paddle movement based on AI mode(is on or off).
 		if (rightPaddle_Ref.playAgainstAI)
-			ball_Ref.UpdateAIPaddleMovement(rightPaddle_Ref, deltaTime);
+			rightPaddle_Ref.UpdateAIPaddleMovement(ball_Ref, deltaTime);
 
 		//Top and Bottom boundry collision check
 		ball_Ref.CheckForTopAndBottom_BoundryCollision(deltaTime);
@@ -212,7 +212,7 @@ void Pong::MainRenderWindow::Render()
 	//Main-menu text | In-Game Background sprite based on the game state.
 	commonElementsHandler.Render(*mainRenderWindow);
 
-	if(inGame)
+	if(Pong::GlobalVariables::inGame)
 	{
 		//Rendering paddles and ball
 		leftPaddle_Ref.Render(*mainRenderWindow);

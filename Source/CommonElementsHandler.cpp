@@ -39,7 +39,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		Pong::Log::Print("Error loading the background texture.");
 
 		sf::Image tempImage = sf::Image();
-		tempImage.create(Pong::SCREEN_WIDTH, Pong::SCREEN_HEIGHT, sf::Color::Blue);		
+		tempImage.create(Pong::GlobalVariables::SCREEN_WIDTH, Pong::GlobalVariables::SCREEN_HEIGHT, sf::Color::Blue);
 		bgTexture.loadFromImage(tempImage);
 	}
 	else
@@ -49,8 +49,8 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 
 	bgSprite.setTexture(bgTexture);
 	bgSprite.setScale(
-		Pong::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
-		Pong::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
+		Pong::GlobalVariables::SCREEN_WIDTH / bgSprite.getLocalBounds().width,
+		Pong::GlobalVariables::SCREEN_HEIGHT / bgSprite.getLocalBounds().height);
 
 	title_Text.GetTextRef().setFont(fontRef);
 	startgame_Text.GetTextRef().setFont(fontRef);
@@ -75,10 +75,10 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 	quitgame_Text.SetIsSelected(false);
 	playmode.GetTextRef().setFillColor(sf::Color(128U, 128U, 128U));
 
-	title_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
-	startgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + 50.0f);
-	quitgame_Text.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 50.0f));
-	playmode.GetTextRef().setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f + Pong::TextHandler::textSize * 10);
+	title_Text.GetTextRef().setPosition(Pong::GlobalVariables::SCREEN_WIDTH / 2.0f - Pong::TextHandler::textSize * 4, Pong::TextHandler::textSize * 4);
+	startgame_Text.GetTextRef().setPosition(Pong::GlobalVariables::SCREEN_WIDTH / 2.0f, Pong::GlobalVariables::SCREEN_HEIGHT / 2.0f + 50.0f);
+	quitgame_Text.GetTextRef().setPosition(Pong::GlobalVariables::SCREEN_WIDTH / 2.0f, Pong::GlobalVariables::SCREEN_HEIGHT / 2.0f + (Pong::TextHandler::textSize * 2 + 50.0f));
+	playmode.GetTextRef().setPosition(Pong::GlobalVariables::SCREEN_WIDTH / 2.0f, Pong::GlobalVariables::SCREEN_HEIGHT / 2.0f + Pong::TextHandler::textSize * 10);
 
 	ballBounceSound.setBuffer(ballSB);
 	ballBounceSound.setVolume(30.0f);
@@ -88,7 +88,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 
 void Pong::CommonElementsHandler::Render(sf::RenderWindow& mainRenderWindow)
 {
-	if (!Pong::inGame)
+	if (!Pong::GlobalVariables::inGame)
 	{
 		mainRenderWindow.draw(title_Text.GetTextRef());
 		mainRenderWindow.draw(startgame_Text.GetTextRef());
@@ -108,7 +108,7 @@ sf::Text& Pong::CommonElementsHandler::GetMainTextRef()
 
 void Pong::CommonElementsHandler::PlayBallAudio()
 {
-	if (ballBounceSound.getStatus() == sf::SoundSource::Status::Playing)
-		ballBounceSound.stop();
+	//if (ballBounceSound.getStatus() == sf::SoundSource::Status::Playing)
+		//ballBounceSound.stop();
 	ballBounceSound.play();
 }

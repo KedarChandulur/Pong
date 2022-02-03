@@ -6,19 +6,21 @@
 
 namespace Pong
 {
+	class Paddle;
+
 	/// <summary>
 	/// Creates and controls Main Ball
 	/// </summary>
-	class Ball : protected Pong::Common
+	class Ball : private Pong::BaseAppClass
 	{
 	public:
 		Ball() = default;
-		~Ball() = default;
+		virtual ~Ball() = default;
 
 		void Init();
 		void SetRandomAngle();
 
-		void UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime);
+		//void UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime);
 
 		void CheckForTopAndBottom_BoundryCollision(const float& deltaTime);
 
@@ -29,14 +31,19 @@ namespace Pong
 		bool CheckForRight_BoundryCollision() const;
 
 		void Render(sf::RenderWindow& mainRenderWindow) override;
+
+		const sf::CircleShape& GetMainBall() const;
+		const float& GetRadius() const;
 	private:
 		sf::CircleShape mainBall;
 
+		float speed = 225.0f;
 		//Used for determining ball's move direction(based on angle)
 		float ballAngle = 0.0f;
 		float ballRadius = 5.0f;
 
 		const float pi = 3.14159f;
+		const uint16_t outLineThickness = 3;
 	};
 }
 #endif

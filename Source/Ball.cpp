@@ -2,14 +2,14 @@
 
 void Pong::Ball::Init()
 {
-	ballRadius = (float)(Pong::SCREEN_WIDTH / Pong::SCREEN_HEIGHT) * 10;
+	ballRadius = (float)(Pong::GlobalVariables::SCREEN_WIDTH / Pong::GlobalVariables::SCREEN_HEIGHT) * 10;
 	
 	this->mainBall.setRadius(ballRadius - outLineThickness);
 	this->mainBall.setOutlineThickness(outLineThickness);
 	this->mainBall.setOutlineColor(sf::Color::Cyan);
 
 	this->mainBall.setOrigin(ballRadius / 2, ballRadius / 2);
-	this->mainBall.setPosition(Pong::SCREEN_WIDTH / 2.0f, Pong::SCREEN_HEIGHT / 2.0f);	
+	this->mainBall.setPosition(Pong::GlobalVariables::SCREEN_WIDTH / 2.0f, Pong::GlobalVariables::SCREEN_HEIGHT / 2.0f);
 }
 
 void Pong::Ball::SetRandomAngle()
@@ -40,10 +40,10 @@ void Pong::Ball::CheckForTopAndBottom_BoundryCollision(const float& deltaTime)
 	}
 
 	//Checking Bottom Border collision with mainBall
-	if (this->mainBall.getPosition().y + ballRadius > Pong::SCREEN_HEIGHT)
+	if (this->mainBall.getPosition().y + ballRadius > Pong::GlobalVariables::SCREEN_HEIGHT)
 	{
 		ballAngle = -ballAngle;
-		this->mainBall.setPosition(this->mainBall.getPosition().x, Pong::SCREEN_HEIGHT - ballRadius);
+		this->mainBall.setPosition(this->mainBall.getPosition().x, Pong::GlobalVariables::SCREEN_HEIGHT - ballRadius);
 	}
 
 	//Using cos for determining x - move direction
@@ -64,7 +64,7 @@ bool Pong::Ball::CheckForLeft_BoundryCollision() const
 
 bool Pong::Ball::CheckForRight_BoundryCollision() const
 {
-	if (this->mainBall.getPosition().x + ballRadius > Pong::SCREEN_WIDTH - 25.0f)
+	if (this->mainBall.getPosition().x + ballRadius > Pong::GlobalVariables::SCREEN_WIDTH - 25.0f)
 	{
 		//Player-1/Left Paddle Wins
 		return true;
@@ -76,6 +76,16 @@ bool Pong::Ball::CheckForRight_BoundryCollision() const
 void Pong::Ball::Render(sf::RenderWindow& mainRenderWindow)
 {
 	mainRenderWindow.draw(mainBall);
+}
+
+const sf::CircleShape& Pong::Ball::GetMainBall() const
+{
+	return mainBall;
+}
+
+const float& Pong::Ball::GetRadius() const
+{
+	return ballRadius;
 }
 
 void Pong::Ball::CheckForLeftPaddleCollision(const Pong::Paddle& leftPaddle, Pong::CommonElementsHandler& commonElementsHandler)
@@ -112,22 +122,22 @@ void Pong::Ball::CheckForRightPaddleCollision(const Pong::Paddle& rightPaddle, P
 	}
 }
 
-void Pong::Ball::UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime)
-{
-	if (((rightPaddle.GetSpeed() < 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2 > 5.f)) ||
-		((rightPaddle.GetSpeed() > 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2 < Pong::SCREEN_HEIGHT - 5.f)))
-	{
-		rightPaddle.MoveAIPaddle(deltaTime);
-	}
-
-	if (rightPaddle.GetAITimerRef().getElapsedTime() > rightPaddle.GetMaxHitTime())
-	{
-		rightPaddle.GetAITimerRef().restart();
-		if (mainBall.getPosition().y + ballRadius > rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2)
-			rightPaddle.UpdateAIPaddleSpeed(1);
-		else if (mainBall.getPosition().y - ballRadius < rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2)
-			rightPaddle.UpdateAIPaddleSpeed(-1);
-		else
-			rightPaddle.UpdateAIPaddleSpeed(0);
-	}
-}
+//void Pong::Ball::UpdateAIPaddleMovement(Pong::Paddle& rightPaddle, const float& deltaTime)
+//{
+//	if (((rightPaddle.GetSpeed() < 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2 > 5.f)) ||
+//		((rightPaddle.GetSpeed() > 0.f) && (rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2 < Pong::GlobalVariables::SCREEN_HEIGHT - 5.f)))
+//	{
+//		rightPaddle.MoveAIPaddle(deltaTime);
+//	}
+//
+//	if (rightPaddle.GetAITimerRef().getElapsedTime() > rightPaddle.GetMaxHitTime())
+//	{
+//		rightPaddle.GetAITimerRef().restart();
+//		if (mainBall.getPosition().y + ballRadius > rightPaddle.GetMainPaddleRef().getPosition().y + rightPaddle.GetPaddleSize().y / 2)
+//			rightPaddle.UpdateAIPaddleSpeed(1);
+//		else if (mainBall.getPosition().y - ballRadius < rightPaddle.GetMainPaddleRef().getPosition().y - rightPaddle.GetPaddleSize().y / 2)
+//			rightPaddle.UpdateAIPaddleSpeed(-1);
+//		else
+//			rightPaddle.UpdateAIPaddleSpeed(0);
+//	}
+//}

@@ -1,7 +1,7 @@
 #ifndef COMMONELEMENTSHANDLER_H
 #define COMMONELEMENTSHANDLER_H
 
-#include "GlobalVariables.h"
+#include "BaseAppClass.h"
 #include "TextHandler.h"
 #include <SFML/Audio.hpp>
 
@@ -10,16 +10,17 @@ namespace Pong
 	/// <summary>
 	/// Common class for text/bg-image rendering and also contains main menu elements
 	/// </summary>
-	class CommonElementsHandler
+	class CommonElementsHandler : private Pong::BaseAppClass
 	{
 	public:
+		virtual ~CommonElementsHandler() = default;
 		//Returns true if initialization is successful
 		bool Init(sf::RenderWindow& mainRenderWindow);
 		void PlayBallAudio();
 
 		sf::Text& GetMainTextRef();
 
-		void Render(sf::RenderWindow& mainRenderWindow);
+		void Render(sf::RenderWindow& mainRenderWindow) override;
 
 		TextHandler startgame_Text;
 		TextHandler quitgame_Text;
@@ -37,7 +38,7 @@ namespace Pong
 		TextHandler title_Text;
 		//Buffer which loads and stores audio sample of ball bounce
 		sf::SoundBuffer ballSB;
-		sf::Sound ballBounceSound;		
+		sf::Sound ballBounceSound;
 	};
 }
 #endif
