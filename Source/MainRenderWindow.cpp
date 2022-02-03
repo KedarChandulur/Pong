@@ -97,7 +97,7 @@ void Pong::MainRenderWindow::ProcessEvents(const float& deltaTime, sf::Clock& cl
 					if (!rightPaddle_Ref.playAgainstAI)
 					{
 						commonElementsHandler.playmode.GetTextRef().setString("P v P");
-						rightPaddle_Ref.ValidateManualSpeed();
+						rightPaddle_Ref.ReValidateManualSpeed();
 					}
 					else
 					{
