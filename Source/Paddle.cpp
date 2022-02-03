@@ -111,16 +111,6 @@ const sf::Vector2f& Pong::Paddle::GetPaddleSize() const
 	return paddleSize;
 }
 
-const float& Pong::Paddle::GetSpeed() const
-{
-	return speed;
-}
-
-const sf::Time& Pong::Paddle::GetMaxHitTime() const
-{
-	return max_AI_hitTime;
-}
-
 sf::Vector2f Pong::Paddle::paddleSize = sf::Vector2f(25.0f, 100.0f);
 sf::Time Pong::Paddle::max_AI_hitTime = sf::seconds(0.1f);
 sf::Clock Pong::Paddle::AI_Timer;

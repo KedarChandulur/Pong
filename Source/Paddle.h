@@ -29,21 +29,20 @@ namespace Pong
 		void UpdateAIPaddleMovement(Pong::Ball& ball, const float& deltaTime);
 
 		void UpdateAIPaddleSpeed(const int16_t updatedSpeed);
-		void MoveAIPaddle(const float& deltaTime);
 
 		void SetAIDifficulty(const uint16_t& difficultyLevel);
 
 		sf::Clock& GetAITimerRef() const;
 
-		const sf::Time& GetMaxHitTime() const;
 		const sf::RectangleShape& GetMainPaddleRef() const;
 		const sf::Vector2f& GetPaddleSize() const;
-		const float& GetSpeed() const;
 
 		void Render(sf::RenderWindow& mainRenderWindow) override;
 
 		static bool playAgainstAI;
 	private:
+		void MoveAIPaddle(const float& deltaTime);
+
 		sf::RectangleShape mainPaddle;
 
 		float speed = 225.0f;
