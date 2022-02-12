@@ -9,9 +9,17 @@ namespace Pong
 	struct Math
 	{
 	public:
-		static float Lerp(float a, float b, float t);
-		//Takes variables as const  references
-		static float Lerp_ThroughReference(const float& a, const float& b, const float& t);
+		template<typename T>
+		static T Lerp(T a, T b, float t)
+		{
+			return (a * (1.0f - t)) + (b * t);
+		}
+
+		template<typename T>
+		static T Lerp_ThroughReference(const T& a, const T& b, float& t)
+		{
+			return (a * (1.0f - t)) + (b * t);
+		}
 
 		Math(Math& other) = delete;
 		void operator=(const Math&) = delete;

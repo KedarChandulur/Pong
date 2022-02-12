@@ -11,7 +11,7 @@ namespace Pong
 	/// <summary>
 	/// Creates and controls Main Ball
 	/// </summary>
-	class Ball : private Pong::BaseAppClass
+	class Ball : Pong::BaseAppClass
 	{
 	public:
 		Ball() = default;

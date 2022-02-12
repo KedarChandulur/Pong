@@ -59,9 +59,9 @@ void Pong::Paddle::SetAIDifficulty(const uint16_t& difficultyLevel)
 void Pong::Paddle::MoveAIPaddle(const float& deltaTime)
 {
 	//Using this to get random position 
-	float RandomLerpValue = Pong::Math::Lerp(0.21f, 0.36f, (rand() % 10) * 0.1f);
+	float randomLerpValue = Pong::Math::Lerp(0.21f, 0.36f, (rand() % 10) * 0.1f);
 	float targetLerpValue = mainPaddle.getPosition().y + speed * deltaTime;
-	float updatedPositionWithLerp = Pong::Math::Lerp_ThroughReference(mainPaddle.getPosition().y, targetLerpValue, RandomLerpValue);
+	float updatedPositionWithLerp = Pong::Math::Lerp_ThroughReference(mainPaddle.getPosition().y, targetLerpValue, randomLerpValue);
 
 	mainPaddle.setPosition(mainPaddle.getPosition().x, updatedPositionWithLerp);
 }
@@ -88,7 +88,7 @@ void Pong::Paddle::UpdateAIPaddleMovement(Pong::Ball& ball, const float& deltaTi
 
 void Pong::Paddle::UpdateAIPaddleSpeed(const int16_t updatedSpeed)
 {	
-	speed = static_cast<float>((defaultSpeed / 2 - static_cast<uint16_t>(difficultyLevel)) * updatedSpeed);
+	speed = static_cast<float>((defaultSpeed / 2 - difficultyLevel) * updatedSpeed);
 }
 
 void Pong::Paddle::Render(sf::RenderWindow& mainRenderWindow)

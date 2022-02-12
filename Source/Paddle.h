@@ -11,7 +11,7 @@ namespace Pong
 	/// <summary>
 	/// Creates and controls Paddle(s)
 	/// </summary>
-	class Paddle : private Pong::BaseAppClass
+	class Paddle : Pong::BaseAppClass
 	{
 	public:
 		Paddle() = default;
@@ -44,7 +44,6 @@ namespace Pong
 
 		float speed = 225.0f;
 
-		//Pong::GlobalEnums::DifficultyLevel difficultyLevel = Pong::GlobalEnums::DifficultyLevel::Medium;
 		uint16_t difficultyLevel = static_cast<uint16_t>(Pong::GlobalEnums::DifficultyLevel::Medium);
 
 		static sf::Vector2f paddleSize;

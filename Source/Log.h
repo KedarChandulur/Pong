@@ -11,14 +11,6 @@ namespace Pong
 	struct Log
 	{
 	public:
-		//End line is already added inside the function.
-		//static void Print(const char* stringToPrint);
-
-		//template<typename T>
-		//static void Print(T& log);
-		//template<typename T>
-		//static void Print(T* log);
-
 		template<typename T>
 		static void Print(const T& log)
 		{
