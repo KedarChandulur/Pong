@@ -10,7 +10,7 @@ namespace Pong
 	/// <summary>
 	/// Common class for text/bg-image rendering and also contains main menu elements
 	/// </summary>
-	class CommonElementsHandler : private Pong::BaseAppClass
+	class CommonElementsHandler : Pong::BaseAppClass
 	{
 	public:
 		virtual ~CommonElementsHandler() = default;
