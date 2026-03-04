@@ -1,3 +1,11 @@
+// For _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
+// For _CrtSetBreakAlloc(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF)
+#include <crtdbg.h>
+
+// For EXIT_SUCCESS
+// For EXIT_FAILURE
+#include <cstdlib>
+
 #include "Application.h"
 
 int main()
