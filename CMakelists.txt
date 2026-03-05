@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION "3.20.0")
 
+add_subdirectory("external/SFML")
+
 project("Pong")
 
 set(CMAKE_CXX_STANDARD 98)
@@ -7,6 +9,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp")
 
-add_executable(${CMAKE_PROJECT_NAME} "${MY_SOURCES}")
+add_executable(${CMAKE_PROJECT_NAME})
 
-target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Source/")
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE 
+    sfml-graphics 
+    sfml-window 
+    sfml-system 
+    sfml-audio
+)
+
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MY_SOURCES})
+
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Source/*.h")
