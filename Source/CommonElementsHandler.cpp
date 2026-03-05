@@ -5,7 +5,7 @@
 //But without font, game's menu text itself is not visible - so returning false only on font failure.
 bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 {
-	if (!fontRef.loadFromFile("Resources/Pacifico-Regular.ttf"))
+	if (!fontRef.loadFromFile(RESOURCES_PATH "Pacifico-Regular.ttf"))
 	{
 		Pong::Log::Print("Error loading the Font.");
 		return false;
@@ -15,7 +15,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		Pong::Log::Print("Font loaded.");
 	}
 
-	if (!iconImage_Ref.loadFromFile("Resources/pong_icon.png"))
+	if (!iconImage_Ref.loadFromFile(RESOURCES_PATH "pong_icon.png"))
 	{
 		Pong::Log::Print("Error loading the Icon Image.");
 	}
@@ -25,7 +25,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		mainRenderWindow.setIcon(iconImage_Ref.getSize().x, iconImage_Ref.getSize().y, iconImage_Ref.getPixelsPtr());
 	}
 	
-	if (!ballSB.loadFromFile("Resources/mixkit-game-ball-tap-2073.wav"))
+	if (!ballSB.loadFromFile(RESOURCES_PATH "mixkit-game-ball-tap-2073.wav"))
 	{
 		Pong::Log::Print("Error loading the Audio clip.");
 	}
@@ -34,7 +34,7 @@ bool Pong::CommonElementsHandler::Init(sf::RenderWindow& mainRenderWindow)
 		Pong::Log::Print("Audio clip loaded.");
 	}
 
-	if (!bgTexture.loadFromFile("Resources/Pong_BG.png"))
+	if (!bgTexture.loadFromFile(RESOURCES_PATH "Pong_BG.png"))
 	{
 		Pong::Log::Print("Error loading the background texture.");
 
