@@ -1,14 +1,27 @@
-# Pong using Cpp and SFML
-**Tools used**: Visual Studio Community 2019, SFML Library.
+# Pong using C++ and SFML
 
-## Steps to followed to run the game locally.
-### Dependencies:
-#### SFML Setup:
-**SFML tutorials main link**:
-https://www.sfml-dev.org/tutorials/2.5/
+A classic Pong game built using C++ and the SFML library. 
 
-**Use this link to setup SFML in visual studio**:
-https://www.sfml-dev.org/tutorials/2.5/start-vc.php
+**Tools used**: Visual Studio Community 2019 / 2022, CMake, SFML Library (v2.6.2).
+
+---
+
+## How to Build and Run the Game Locally
+
+This project uses **CMake** and a **Git Submodule** to manage the SFML dependency. This makes it incredibly easy to compile the game on any machine without needing to manually download or link external libraries.
+
+### Clone the Repository
+Because SFML is included as a Git submodule, you must clone the repository recursively to pull down the SFML files at the same time:
+
+```bash
+git clone --recurse-submodules https://github.com/KedarChandulur/Pong
+```
+
+If you already cloned the repo normally, run the below command inside the project folder to fetch SFML
+
+```bash
+git submodule update --init --recursive
+```
 
 ### After the Depenencies setup:
 After SFML setup is successful, Build the project based on the IDE you are using.
