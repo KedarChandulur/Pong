@@ -72,3 +72,15 @@ target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE
     sfml-system 
     sfml-audio
 )
+
+
+# Only copy the Resources folder if we are building for production
+if(PRODUCTION_BUILD)
+    add_custom_command(
+        TARGET "${CMAKE_PROJECT_NAME}" POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
+        "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/Resources"
+        COMMENT "Copying Resources folder to build directory..."
+    )
+endif()
