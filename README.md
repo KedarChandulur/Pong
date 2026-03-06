@@ -40,6 +40,7 @@ git submodule update --init --recursive
 
 #### Using Command Line (Platform Independent):
 
+##### Method 1
 - Open a terminal in the root directory of the project.
 
 - Generate the build files: cmake -B build
@@ -47,6 +48,19 @@ git submodule update --init --recursive
 - Compile the game: cmake --build build --config Release
 
 - Run the executable located in the build directory!
+
+##### Method 2
+To compile:
+```bash
+mkdir build && cd build
+cmake ..
+cmake --build .
+```
+
+To run:
+```bash
+./Pong
+```
 
 ---
 
