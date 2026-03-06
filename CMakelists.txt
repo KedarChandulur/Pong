@@ -33,6 +33,7 @@ add_subdirectory("external/SFML")
 # MY_SOURCES is defined to be a list of all the source files for my pong game
 # DON'T ADD THE SOURCES BY HAND, they are already added with this macro
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Source/*.cpp")
+message(STATUS "Sources found: ${MY_SOURCES}")
 
 add_executable("${CMAKE_PROJECT_NAME}")
 
