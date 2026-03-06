@@ -2,7 +2,7 @@
 
 A classic Pong game built using C++ and the SFML library. 
 
-**Tools used**: Visual Studio Community 2019 / 2022, CMake, SFML Library (v2.6.2).
+**Tools used**: Visual Studio, CMake, SFML Library (v2.6.2).
 
 ---
 
@@ -23,10 +23,34 @@ If you already cloned the repo normally, run the below command inside the projec
 git submodule update --init --recursive
 ```
 
-### After the Depenencies setup:
-After SFML setup is successful, Build the project based on the IDE you are using.
+### Build the Project using CMake
+#### Using Visual Studio:
 
-## Game Files can be found here:
+- Open Visual Studio.
+
+- Select "Open a local folder" and choose the root directory of this repository (where the CMakeLists.txt file is located).
+
+- Visual Studio will automatically detect the CMake configuration and configure the project.
+
+- Select your build target (e.g., Pong.exe) and build configuration (Debug or Release) from the top toolbar.
+
+- Click Build > Build All (or press F7).
+
+- Run the game!
+
+#### Using Command Line (Platform Independent):
+
+- Open a terminal in the root directory of the project.
+
+- Generate the build files: cmake -B build
+
+- Compile the game: cmake --build build --config Release
+
+- Run the executable located in the build directory!
+
+---
+
+## Game build can be found here:
 https://drive.google.com/drive/folders/1ZCkskUGtOwU5iOyZXaubolIBeso4dU0h?usp=sharing
 
 **Game Instructions(Keybindings)**:
@@ -37,6 +61,8 @@ https://drive.google.com/drive/folders/1ZCkskUGtOwU5iOyZXaubolIBeso4dU0h?usp=sha
 - **Arrow Up and/or down[Menu Specific]**: Use these keybindings to naviagate between text elements in main menu or restart(game) menu.
 - **Arrow Up and/or down[In Game Specific]**: Use these keybindings to move Right(Player - 2's) Paddle, while in player vs player mode.
 - **W and/or S**: Use these keybindings to move Left(Player - 1's) Paddle, mode won't have any affect on Left(Player - 1's) Paddle.
+
+---
 
 **Game Screenshots**:
 ![MainMenu_Screen](https://user-images.githubusercontent.com/47148900/149375575-63be9292-eb28-47ca-b640-6fe811a4cbe1.png)
