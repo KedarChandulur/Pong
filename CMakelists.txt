@@ -84,3 +84,16 @@ if(PRODUCTION_BUILD)
         COMMENT "Copying Resources folder to build directory..."
     )
 endif()
+
+
+# Copy OpenAL32.dll - always required even when SFML is linked statically
+if(WIN32)
+    add_custom_command(
+        TARGET "${CMAKE_PROJECT_NAME}" POST_BUILD
+        COMMENT "Copying OpenAL32.dll to build directory..."
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/external/SFML/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll"
+        "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>"
+        VERBATIM
+    )
+endif()
